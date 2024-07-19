@@ -1,0 +1,12 @@
+entity:
+  label:
+    NopDemo: null
+prop:
+  label:
+    NopDemo:
+      id_: null
+      name: null
+      enabled: null
+      addTime: null
+      updateTime: null
+      deleted: null
