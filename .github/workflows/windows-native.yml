@@ -20,6 +20,15 @@ jobs:
     runs-on: windows-2022
 
     steps:
+
+      # 缓存Maven的本地仓库
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
       - uses: actions/checkout@v3 # 这是GitHub提供的一个动作（action），用于将代码从GitHub仓库检出到工作目录中。v3是该动作的版本号。
       - name: GitHub Action for GraalVM JDK 21
         uses: graalvm/setup-graalvm@v1
@@ -35,7 +44,7 @@ jobs:
         run: |
           set MAVEN_OPTS="-Duser.language=UTF-8 -Dfile.encoding=UTF-8"
           cd hj-demo-app
-          mvn package -Pnative --file pom.xml --no-transfer-progress
+          mvn package -DskipTests -Pnative
 
       - name: Upload artifacts app
         uses: actions/upload-artifact@v3
