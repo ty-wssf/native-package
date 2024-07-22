@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Build windows native image
+name: Build linux and mac native image
 
 on:
   push:
@@ -15,9 +15,16 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
 
-    runs-on: windows-2022
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        # see: https://docs.github.com/zh/actions/using-jobs/choosing-the-runner-for-a-job
+        # os: ['ubuntu-20.04', 'macos-12']
+        os: [ 'ubuntu-20.04' ]
+    name: build - ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
 
     steps:
 
