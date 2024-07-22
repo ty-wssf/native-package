@@ -1,0 +1,29 @@
+server:
+  port: 8050
+  http.gzip.enable: true
+
+solon:
+  app:
+    group: network-proxy
+    name: network-proxy-app
+  config:
+    add: ./app.yml
+
+solon.logging.appender:
+  console:
+    level: INFO #可根据需要调整级别
+    enable: true #是否启用
+  file:
+    level: INFO
+    name: "logs/${solon.app.name}"
+    rolling: "logs/${solon.app.name}_%d{yyyy-MM-dd}/%i.log"
+    maxFileSize: "10 MB"
+    maxHistory: "7"
+
+solon.logging.logger:
+  "root": #默认记录器配置
+    level: INFO
+  "io.netty":
+    level: WARN
+  "com.zaxxer.hikari":
+    level: WARN
