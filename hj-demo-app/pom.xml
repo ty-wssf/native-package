@@ -41,6 +41,11 @@
             <artifactId>nop-web-amis-editor</artifactId>
         </dependency>
 
+        <!-- 般在主模块里引入 http-server 相关组件（方便切换选择不同的方案） -->
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon-api</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.noear</groupId>
             <artifactId>solon.logging.logback</artifactId>
