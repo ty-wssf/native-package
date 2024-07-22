@@ -1,6 +1,6 @@
 
 nop:
-  debug: false
+  debug: true
   auth:
     jwt:
       enc-key: d12a089db9c44528a3f148004f5af602
@@ -11,7 +11,7 @@ nop:
     site-map:
       static-config-path: /hj/demo/auth/app.action-auth.xml
       cache-timeout: 1s
-      support-debug: false
+      support-debug: true
 
     data-auth-config-path: /hj/demo/auth/app.data-auth.xml
 
