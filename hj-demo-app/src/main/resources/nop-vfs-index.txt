@@ -247,10 +247,7 @@
 /nop/autoconfig/nop-auth-core.beans
 /nop/autoconfig/nop-biz.beans
 /nop/autoconfig/nop-dao.beans
-/nop/autoconfig/nop-gateway.beans
-/nop/autoconfig/nop-http-client-jdk.beans
 /nop/autoconfig/nop-orm.beans
-/nop/autoconfig/nop-quarkus-web-starter.beans
 /nop/autoconfig/nop-web.beans
 /nop/biz/beans/biz-defaults.beans.xml
 /nop/biz/defaults/service-base.beans.xml
@@ -265,7 +262,6 @@
 /nop/core/registry/api.register-model.xml
 /nop/core/registry/dialect.register-model.xml
 /nop/core/registry/dict.register-model.xml
-/nop/core/registry/gateway.register-model.xml
 /nop/core/registry/orm.register-model.xml
 /nop/core/registry/validator.register-model.xml
 /nop/core/registry/xlib.register-model.xml
@@ -309,14 +305,11 @@
 /nop/file/beans/_dao.beans.xml
 /nop/file/beans/app-file-core.beans.xml
 /nop/file/beans/app-file-dao.beans.xml
-/nop/file/beans/app-file-quarkus.beans.xml
 /nop/file/orm/_app.orm.xml
 /nop/file/orm/app.orm.xml
-/nop/gateway/beans/gateway-defaults.beans.xml
 /nop/graphql/base.graphql
 /nop/graphql/default.graphql
 /nop/graphql/introspection.graphql
-/nop/http/beans/http-client-jdk.beans.xml
 /nop/orm/beans/orm-defaults.beans.xml
 /nop/orm/defaults/default.orm.xml
 /nop/orm/defaults/dsl-default.orm.xml
@@ -335,7 +328,6 @@
 /nop/orm/xlib/orm-gen.xlib
 /nop/orm/xlib/pdman.xlib
 /nop/orm/xlib/sql.xlib
-/nop/quarkus/beans/quarkus-defaults.beans.xml
 /nop/rpc/imp/api.imp.xml
 /nop/rpc/imp/template.api.xlsx
 /nop/schema/action-auth.xdef
