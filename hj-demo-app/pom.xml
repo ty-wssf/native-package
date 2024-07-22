@@ -60,17 +60,6 @@
         </dependency>
     </dependencies>
 
-    <profiles>
-        <profile>
-            <id>native</id>
-            <activation>
-                <property>
-                    <name>native</name>
-                </property>
-            </activation>
-        </profile>
-    </profiles>
-
     <build>
         <plugins>
             <plugin>
