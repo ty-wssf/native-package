@@ -28,27 +28,43 @@ public class _RminfJgVehicleinfo extends DynamicOrmEntity{
     public static final String PROP_NAME_kkbh = "kkbh";
     public static final int PROP_ID_kkbh = 2;
     
+    /* 号牌号码: HPHM VARCHAR */
+    public static final String PROP_NAME_hphm = "hphm";
+    public static final int PROP_ID_hphm = 3;
+    
+    /* 通行图片1: TP1 VARCHAR */
+    public static final String PROP_NAME_tp1 = "tp1";
+    public static final int PROP_ID_tp1 = 4;
+    
+    /* 通行图片2: TP2 VARCHAR */
+    public static final String PROP_NAME_tp2 = "tp2";
+    public static final int PROP_ID_tp2 = 5;
+    
+    /* 通行图片3: TP3 VARCHAR */
+    public static final String PROP_NAME_tp3 = "tp3";
+    public static final int PROP_ID_tp3 = 6;
+    
     /* 创建时间: ADD_TIME DATETIME */
     public static final String PROP_NAME_addTime = "addTime";
-    public static final int PROP_ID_addTime = 4;
+    public static final int PROP_ID_addTime = 7;
     
     /* 更新时间: UPDATE_TIME DATETIME */
     public static final String PROP_NAME_updateTime = "updateTime";
-    public static final int PROP_ID_updateTime = 5;
+    public static final int PROP_ID_updateTime = 8;
     
     /* 逻辑删除: DELETED BOOLEAN */
     public static final String PROP_NAME_deleted = "deleted";
-    public static final int PROP_ID_deleted = 6;
+    public static final int PROP_ID_deleted = 9;
     
 
-    private static int _PROP_ID_BOUND = 7;
+    private static int _PROP_ID_BOUND = 10;
 
     
 
     protected static final List<String> PK_PROP_NAMES = Arrays.asList(PROP_NAME_id_);
     protected static final int[] PK_PROP_IDS = new int[]{PROP_ID_id_};
 
-    private static final String[] PROP_ID_TO_NAME = new String[7];
+    private static final String[] PROP_ID_TO_NAME = new String[10];
     private static final Map<String,Integer> PROP_NAME_TO_ID = new HashMap<>();
     static{
       
@@ -57,6 +73,18 @@ public class _RminfJgVehicleinfo extends DynamicOrmEntity{
       
           PROP_ID_TO_NAME[PROP_ID_kkbh] = PROP_NAME_kkbh;
           PROP_NAME_TO_ID.put(PROP_NAME_kkbh, PROP_ID_kkbh);
+      
+          PROP_ID_TO_NAME[PROP_ID_hphm] = PROP_NAME_hphm;
+          PROP_NAME_TO_ID.put(PROP_NAME_hphm, PROP_ID_hphm);
+      
+          PROP_ID_TO_NAME[PROP_ID_tp1] = PROP_NAME_tp1;
+          PROP_NAME_TO_ID.put(PROP_NAME_tp1, PROP_ID_tp1);
+      
+          PROP_ID_TO_NAME[PROP_ID_tp2] = PROP_NAME_tp2;
+          PROP_NAME_TO_ID.put(PROP_NAME_tp2, PROP_ID_tp2);
+      
+          PROP_ID_TO_NAME[PROP_ID_tp3] = PROP_NAME_tp3;
+          PROP_NAME_TO_ID.put(PROP_NAME_tp3, PROP_ID_tp3);
       
           PROP_ID_TO_NAME[PROP_ID_addTime] = PROP_NAME_addTime;
           PROP_NAME_TO_ID.put(PROP_NAME_addTime, PROP_ID_addTime);
@@ -75,6 +103,18 @@ public class _RminfJgVehicleinfo extends DynamicOrmEntity{
     
     /* 卡口编号: KKBH */
     private java.lang.String _kkbh;
+    
+    /* 号牌号码: HPHM */
+    private java.lang.String _hphm;
+    
+    /* 通行图片1: TP1 */
+    private java.lang.String _tp1;
+    
+    /* 通行图片2: TP2 */
+    private java.lang.String _tp2;
+    
+    /* 通行图片3: TP3 */
+    private java.lang.String _tp3;
     
     /* 创建时间: ADD_TIME */
     private java.time.LocalDateTime _addTime;
@@ -165,6 +205,18 @@ public class _RminfJgVehicleinfo extends DynamicOrmEntity{
             case PROP_ID_kkbh:
                return getKkbh();
         
+            case PROP_ID_hphm:
+               return getHphm();
+        
+            case PROP_ID_tp1:
+               return getTp1();
+        
+            case PROP_ID_tp2:
+               return getTp2();
+        
+            case PROP_ID_tp3:
+               return getTp3();
+        
             case PROP_ID_addTime:
                return getAddTime();
         
@@ -202,6 +254,46 @@ public class _RminfJgVehicleinfo extends DynamicOrmEntity{
                        err-> newTypeConversionError(PROP_NAME_kkbh));
                }
                setKkbh(typedValue);
+               break;
+            }
+        
+            case PROP_ID_hphm:{
+               java.lang.String typedValue = null;
+               if(value != null){
+                   typedValue = ConvertHelper.toString(value,
+                       err-> newTypeConversionError(PROP_NAME_hphm));
+               }
+               setHphm(typedValue);
+               break;
+            }
+        
+            case PROP_ID_tp1:{
+               java.lang.String typedValue = null;
+               if(value != null){
+                   typedValue = ConvertHelper.toString(value,
+                       err-> newTypeConversionError(PROP_NAME_tp1));
+               }
+               setTp1(typedValue);
+               break;
+            }
+        
+            case PROP_ID_tp2:{
+               java.lang.String typedValue = null;
+               if(value != null){
+                   typedValue = ConvertHelper.toString(value,
+                       err-> newTypeConversionError(PROP_NAME_tp2));
+               }
+               setTp2(typedValue);
+               break;
+            }
+        
+            case PROP_ID_tp3:{
+               java.lang.String typedValue = null;
+               if(value != null){
+                   typedValue = ConvertHelper.toString(value,
+                       err-> newTypeConversionError(PROP_NAME_tp3));
+               }
+               setTp3(typedValue);
                break;
             }
         
@@ -254,6 +346,34 @@ public class _RminfJgVehicleinfo extends DynamicOrmEntity{
             case PROP_ID_kkbh:{
                onInitProp(propId);
                this._kkbh = (java.lang.String)value;
+               
+               break;
+            }
+        
+            case PROP_ID_hphm:{
+               onInitProp(propId);
+               this._hphm = (java.lang.String)value;
+               
+               break;
+            }
+        
+            case PROP_ID_tp1:{
+               onInitProp(propId);
+               this._tp1 = (java.lang.String)value;
+               
+               break;
+            }
+        
+            case PROP_ID_tp2:{
+               onInitProp(propId);
+               this._tp2 = (java.lang.String)value;
+               
+               break;
+            }
+        
+            case PROP_ID_tp3:{
+               onInitProp(propId);
+               this._tp3 = (java.lang.String)value;
                
                break;
             }
@@ -319,6 +439,82 @@ public class _RminfJgVehicleinfo extends DynamicOrmEntity{
         if(onPropSet(PROP_ID_kkbh,value)){
             this._kkbh = value;
             internalClearRefs(PROP_ID_kkbh);
+            
+        }
+    }
+    
+    /**
+     * 号牌号码: HPHM
+     */
+    public java.lang.String getHphm(){
+         onPropGet(PROP_ID_hphm);
+         return _hphm;
+    }
+
+    /**
+     * 号牌号码: HPHM
+     */
+    public void setHphm(java.lang.String value){
+        if(onPropSet(PROP_ID_hphm,value)){
+            this._hphm = value;
+            internalClearRefs(PROP_ID_hphm);
+            
+        }
+    }
+    
+    /**
+     * 通行图片1: TP1
+     */
+    public java.lang.String getTp1(){
+         onPropGet(PROP_ID_tp1);
+         return _tp1;
+    }
+
+    /**
+     * 通行图片1: TP1
+     */
+    public void setTp1(java.lang.String value){
+        if(onPropSet(PROP_ID_tp1,value)){
+            this._tp1 = value;
+            internalClearRefs(PROP_ID_tp1);
+            
+        }
+    }
+    
+    /**
+     * 通行图片2: TP2
+     */
+    public java.lang.String getTp2(){
+         onPropGet(PROP_ID_tp2);
+         return _tp2;
+    }
+
+    /**
+     * 通行图片2: TP2
+     */
+    public void setTp2(java.lang.String value){
+        if(onPropSet(PROP_ID_tp2,value)){
+            this._tp2 = value;
+            internalClearRefs(PROP_ID_tp2);
+            
+        }
+    }
+    
+    /**
+     * 通行图片3: TP3
+     */
+    public java.lang.String getTp3(){
+         onPropGet(PROP_ID_tp3);
+         return _tp3;
+    }
+
+    /**
+     * 通行图片3: TP3
+     */
+    public void setTp3(java.lang.String value){
+        if(onPropSet(PROP_ID_tp3,value)){
+            this._tp3 = value;
+            internalClearRefs(PROP_ID_tp3);
             
         }
     }

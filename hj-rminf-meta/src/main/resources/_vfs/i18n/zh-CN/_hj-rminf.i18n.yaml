@@ -6,6 +6,10 @@ prop:
     RminfJgVehicleinfo:
       addTime: 创建时间
       deleted: 逻辑删除
+      hphm: 号牌号码
       id_: Id
       kkbh: 卡口编号
+      tp1: 通行图片1
+      tp2: 通行图片2
+      tp3: 通行图片3
       updateTime: 更新时间

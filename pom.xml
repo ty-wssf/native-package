@@ -32,7 +32,6 @@
         <module>hj-rminf-service</module>
         <module>hj-rminf-web</module>
         <module>hj-rminf-app</module>
-        <!--<module>hj-rminf-webservices</module>-->
     </modules>
 
     <dependencyManagement>

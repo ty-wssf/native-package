@@ -4,8 +4,10 @@ package com.hj.rminf.app;
 import com.tmri.tfc.webservice.TransWebServiceImpl;
 import jakarta.xml.ws.Endpoint;
 import org.noear.solon.Solon;
+import org.noear.solon.annotation.Import;
 import org.noear.solon.annotation.SolonMain;
 
+@Import(scanPackages = "com.tmri.tfc.webservice")
 @SolonMain
 public class HjRminfApplication {
 

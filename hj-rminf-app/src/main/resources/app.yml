@@ -5,6 +5,13 @@ webservice.addr: http://10.20.11.147:8080/rminf/services/Trans
 soap.force.doclit.bare: true
 server.webservices.path: "/rminf/services/" #默认为 ws
 
+solon.cloud.rabbitmq:
+  server: "10.20.10.5:5672"    #服务地址
+  username: ahbcht              #链接账号
+  password: Bcht123            #链接密码
+  exchangeName: BCHT.ITS.DATA
+  topic: BCHT.ITS.DATA.TOPIC
+
 solon:
   app:
     group: network-proxy

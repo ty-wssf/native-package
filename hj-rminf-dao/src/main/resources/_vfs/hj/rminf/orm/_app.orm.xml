@@ -15,6 +15,7 @@
         <domain name="updateTime" stdSqlType="DATETIME"/>
         <domain name="updatedBy" precision="50" stdSqlType="VARCHAR"/>
         <domain name="delFlag" stdSqlType="BOOLEAN"/>
+        <domain name="image" precision="100" stdSqlType="VARCHAR"/>
     </domains>
 
     <entities>
@@ -26,11 +27,19 @@
                         stdDataType="int" stdSqlType="INTEGER" tagSet="seq" ui:show="R"/>
                 <column code="KKBH" displayName="卡口编号" mandatory="true" name="kkbh" precision="32" propId="2"
                         stdDataType="string" stdSqlType="VARCHAR"/>
-                <column code="ADD_TIME" displayName="创建时间" domain="createTime" name="addTime" propId="4"
+                <column code="HPHM" displayName="号牌号码" mandatory="true" name="hphm" precision="32" propId="3"
+                        stdDataType="string" stdSqlType="VARCHAR"/>
+                <column code="TP1" displayName="通行图片1" domain="image" name="tp1" precision="255" propId="4"
+                        stdDataType="string" stdSqlType="VARCHAR"/>
+                <column code="TP2" displayName="通行图片2" domain="image" name="tp2" precision="255" propId="5"
+                        stdDataType="string" stdSqlType="VARCHAR"/>
+                <column code="TP3" displayName="通行图片3" domain="image" name="tp3" precision="255" propId="6"
+                        stdDataType="string" stdSqlType="VARCHAR"/>
+                <column code="ADD_TIME" displayName="创建时间" domain="createTime" name="addTime" propId="7"
                         stdDataType="datetime" stdSqlType="DATETIME" ui:show="X"/>
-                <column code="UPDATE_TIME" displayName="更新时间" domain="updateTime" name="updateTime" propId="5"
+                <column code="UPDATE_TIME" displayName="更新时间" domain="updateTime" name="updateTime" propId="8"
                         stdDataType="datetime" stdSqlType="DATETIME" ui:show="X"/>
-                <column code="DELETED" displayName="逻辑删除" domain="delFlag" name="deleted" propId="6"
+                <column code="DELETED" displayName="逻辑删除" domain="delFlag" name="deleted" propId="9"
                         stdDataType="boolean" stdSqlType="BOOLEAN" ui:show="X"/>
             </columns>
         </entity>

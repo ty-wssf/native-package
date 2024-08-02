@@ -23,6 +23,18 @@
 
                 <!--卡口编号-->
                 <col id="kkbh" mandatory="true" sortable="true"/>
+
+                <!--号牌号码-->
+                <col id="hphm" mandatory="true" sortable="true"/>
+
+                <!--通行图片1-->
+                <col id="tp1" sortable="true"/>
+
+                <!--通行图片2-->
+                <col id="tp2" sortable="true"/>
+
+                <!--通行图片3-->
+                <col id="tp3" sortable="true"/>
             </cols>
         </grid>
         <grid id="pick-list" x:prototype="list" x:abstract="true"/>
@@ -33,12 +45,20 @@
             <layout>
  id_[Id]
  kkbh[卡口编号]
+ hphm[号牌号码]
+ tp1[通行图片1]
+ tp2[通行图片2]
+ tp3[通行图片3]
 </layout>
         </form>
         <form id="add" editMode="add" title="新增-集光过车（超员）" i18n-en:title="Add " x:prototype="edit"/>
         <form id="edit" editMode="edit" title="编辑-集光过车（超员）" i18n-en:title="Edit ">
             <layout>
  kkbh[卡口编号]
+ hphm[号牌号码]
+ tp1[通行图片1]
+ tp2[通行图片2]
+ tp3[通行图片3]
 </layout>
         </form>
         <form id="query" editMode="query" title="查询条件" i18n-en:title="Query Condition" x:abstract="true"/>

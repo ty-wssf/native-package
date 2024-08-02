@@ -6,6 +6,10 @@ prop:
     RminfJgVehicleinfo:
       id_: null
       kkbh: null
+      hphm: null
+      tp1: null
+      tp2: null
+      tp3: null
       addTime: null
       updateTime: null
       deleted: null
