@@ -23591,6 +23591,119 @@
     "fields": [],
     "methods": [
       {
+        "name": "delete",
+        "parameterTypes": []
+      },
+      {
+        "name": "exists",
+        "parameterTypes": []
+      },
+      {
+        "name": "getExternalPath",
+        "parameterTypes": []
+      },
+      {
+        "name": "getInputStream",
+        "parameterTypes": []
+      },
+      {
+        "name": "getOutputStream",
+        "parameterTypes": []
+      },
+      {
+        "name": "getOutputStream",
+        "parameterTypes": [
+          "boolean"
+        ]
+      },
+      {
+        "name": "getResource",
+        "parameterTypes": []
+      },
+      {
+        "name": "getResourceRegion",
+        "parameterTypes": [
+          "io.nop.api.core.beans.LongRangeBean"
+        ]
+      },
+      {
+        "name": "internalObj",
+        "parameterTypes": []
+      },
+      {
+        "name": "isReadOnly",
+        "parameterTypes": []
+      },
+      {
+        "name": "lastModified",
+        "parameterTypes": []
+      },
+      {
+        "name": "length",
+        "parameterTypes": []
+      },
+      {
+        "name": "saveToFile",
+        "parameterTypes": [
+          "java.io.File"
+        ]
+      },
+      {
+        "name": "saveToResource",
+        "parameterTypes": [
+          "io.nop.core.resource.IResource"
+        ]
+      },
+      {
+        "name": "saveToResource",
+        "parameterTypes": [
+          "io.nop.core.resource.IResource",
+          "io.nop.api.core.util.progress.IStepProgressListener"
+        ]
+      },
+      {
+        "name": "setLastModified",
+        "parameterTypes": [
+          "long"
+        ]
+      },
+      {
+        "name": "toFile",
+        "parameterTypes": []
+      },
+      {
+        "name": "toString",
+        "parameterTypes": []
+      },
+      {
+        "name": "toURL",
+        "parameterTypes": []
+      },
+      {
+        "name": "writeToStream",
+        "parameterTypes": [
+          "java.io.OutputStream"
+        ]
+      },
+      {
+        "name": "writeToStream",
+        "parameterTypes": [
+          "java.io.OutputStream",
+          "io.nop.api.core.util.progress.IStepProgressListener"
+        ]
+      }
+    ],
+    "name": "io.nop.core.resource.impl.DelegateResource",
+    "unsafeAllocated": false
+  },
+  {
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "allPublicConstructors": true,
+    "allPublicMethods": true,
+    "fields": [],
+    "methods": [
+      {
         "name": "exists",
         "parameterTypes": []
       },

@@ -5,40 +5,55 @@ import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * @author wyl
  * @date 2024年08月01日 15:48
  */
-@Service
-@WebService(serviceName = "Trans", // 与接口中指定的name一致, 都可以不写
-        // targetNamespace = "http://webservice.tfc.tmri.com/", // 与接口中的命名空间一致,一般是接口的包名倒，都可以不用写
-        targetNamespace = "", // 与接口中的命名空间一致,一般是接口的包名倒，都可以不用写
-        endpointInterface = "" // 接口类全路径
+// @BindingType("http://java.sun.com/xml/ns/jaxws/2003/05/soap/bindings/HTTP/")
+@WebService(/*name = "Trans", */serviceName = "Trans", // 与接口中指定的name一致, 都可以不写
+        /*targetNamespace = ""*/ // 与接口中的命名空间一致,一般是接口的包名倒，都可以不用写
+        targetNamespace = "http://webservice.tfc.tmri.com/" // 与接口中的命名空间一致,一般是接口的包名倒，都可以不用写
 )
 public class TransWebServiceImpl implements TransWebService {
 
     private Logger log = LoggerFactory.getLogger(TransWebServiceImpl.class);
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
+    /*@Autowired
+    private RabbitTemplate rabbitTemplate;*/
 
-    @Override
-    public long initTrans(@WebParam(name = "kkbh") String kkbh,
+    public long InitTrans(@WebParam(name = "kkbh") String kkbh,
                           @WebParam(name = "fxlx") String fxlx,
                           @WebParam(name = "cdh") String cdh,
                           @WebParam(name = "info") String info) {
         return 1;
     }
 
-    @Override
-    public long writeVehicleInfo(String kkbh, String fxlx, String cdh, String hphm, String hpzl,
-                                 String gcsj, String clsd, String clxs, String wfdm, String cwkc,
-                                 String hpys, String cllx, String fzhpzl, String fzhphm, String fzhpys,
-                                 String clpp, String clwx, String csys, String tplj, String tp1,
-                                 String tp2, String tp3, String tztp, String cid, String tid, String zkrs) {
+    public long WriteVehicleInfo(@WebParam(name = "kkbh") String kkbh,
+                                 @WebParam(name = "fxlx") String fxlx,
+                                 @WebParam(name = "cdh") String cdh,
+                                 @WebParam(name = "hphm") String hphm,
+                                 @WebParam(name = "hpzl") String hpzl,
+                                 @WebParam(name = "gcsj") String gcsj,
+                                 @WebParam(name = "clsd") String clsd,
+                                 @WebParam(name = "clxs") String clxs,
+                                 @WebParam(name = "wfdm") String wfdm,
+                                 @WebParam(name = "cwkc") String cwkc,
+                                 @WebParam(name = "hpys") String hpys,
+                                 @WebParam(name = "cllx") String cllx,
+                                 @WebParam(name = "fzhpzl") String fzhpzl,
+                                 @WebParam(name = "fzhphm") String fzhphm,
+                                 @WebParam(name = "fzhpys") String fzhpys,
+                                 @WebParam(name = "clpp") String clpp,
+                                 @WebParam(name = "clwx") String clwx,
+                                 @WebParam(name = "csys") String csys,
+                                 @WebParam(name = "tplj") String tplj,
+                                 @WebParam(name = "tp1") String tp1,
+                                 @WebParam(name = "tp2") String tp2,
+                                 @WebParam(name = "tp3") String tp3,
+                                 @WebParam(name = "tztp") String tztp,
+                                 @WebParam(name = "cid") String cid,
+                                 @WebParam(name = "tid") String tid,
+                                 @WebParam(name = "zkrs") String zkrs) {
 
         if (StringHelper.isNotEmpty(tp1)) {
             tp1 = tplj + tp1;

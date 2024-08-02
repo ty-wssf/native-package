@@ -18,10 +18,6 @@
     </properties>
 
     <dependencies>
-        <!--<dependency>
-            <groupId>io.github.entropy-cloud</groupId>
-            <artifactId>nop-quarkus-web-orm-starter</artifactId>
-        </dependency>-->
         <dependency>
             <artifactId>hj-rminf-service</artifactId>
             <groupId>com.hj</groupId>
@@ -32,6 +28,7 @@
             <groupId>com.hj</groupId>
             <version>1.0.0</version>
         </dependency>
+
         <dependency>
             <groupId>io.github.entropy-cloud</groupId>
             <artifactId>nop-auth-web</artifactId>
@@ -42,81 +39,77 @@
         </dependency>
         <dependency>
             <groupId>io.github.entropy-cloud</groupId>
-            <artifactId>nop-web-amis-editor</artifactId>
+            <artifactId>nop-sys-web</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.entropy-cloud</groupId>
-            <artifactId>nop-web-site</artifactId>
+            <artifactId>nop-sys-service</artifactId>
+        </dependency>
+
+        <!-- 引入集算器支持。如果不需要可以删除 -->
+        <!--        <dependency>-->
+        <!--            <groupId>io.github.entropy-cloud</groupId>-->
+        <!--            <artifactId>nop-report-spl</artifactId>-->
+        <!--        </dependency>-->
+
+        <dependency>
+            <groupId>io.github.entropy-cloud</groupId>
+            <artifactId>nop-web-amis-editor</artifactId>
+        </dependency>
+
+        <!-- 般在主模块里引入 http-server 相关组件（方便切换选择不同的方案） -->
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon-api</artifactId>
         </dependency>
         <!--<dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-jdbc-mysql</artifactId>
+            <groupId>org.noear</groupId>
+            <artifactId>solon.web.servlet</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-jdbc-h2</artifactId>
+            <groupId>org.noear</groupId>
+            <artifactId>solon.boot.undertow</artifactId>
+        </dependency>-->
+        <!--<dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>${jetty.version}</version> &lt;!&ndash; 根据你的需求选择合适的版本号 &ndash;&gt;
         </dependency>-->
 
         <dependency>
-            <groupId>io.github.entropy-cloud</groupId>
-            <artifactId>nop-spring-web-orm-starter</artifactId>
+            <groupId>org.noear</groupId>
+            <artifactId>solon.logging.logback</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-jdbc-h2</artifactId>
+            <groupId>io.github.entropy-cloud.extensions</groupId>
+            <artifactId>nop-solon-plugin</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon.aot</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <!--<plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${surefire-plugin.version}</version>
-                <configuration>
-                    <systemPropertyVariables>
-                        <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-                        <maven.home>${maven.home}</maven.home>
-                    </systemPropertyVariables>
-                </configuration>
-            </plugin>-->
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>3.2.0</version>
+                <groupId>org.noear</groupId>
+                <artifactId>solon-maven-plugin</artifactId>
+                <version>${solon.version}</version>
                 <executions>
                     <execution>
+                        <phase>package</phase>
                         <goals>
                             <goal>repackage</goal>
                         </goals>
-                        <configuration>
-                            <classifier>exec</classifier>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.graalvm.buildtools</groupId>
-                <artifactId>native-maven-plugin</artifactId>
-                <configuration>
-                    <mainClass>com.hj.rminf.app.HjRminfApplication</mainClass>
-                </configuration>
-            </plugin>
-            <!--<plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-            </plugin>-->
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>native</id>
-            <activation>
-                <property>
-                    <name>native</name>
-                </property>
-            </activation>
-        </profile>
-    </profiles>
 </project>
