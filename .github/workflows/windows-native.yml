@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Build windows native image
+name: Build windows native image1
 
 on:
   push:
