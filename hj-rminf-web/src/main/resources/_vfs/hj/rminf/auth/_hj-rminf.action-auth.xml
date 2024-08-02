@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<auth x:schema="/nop/schema/action-auth.xdef" xmlns:x="/nop/schema/xdsl.xdef" xmlns:i18n-en="i18n-en">
+
+    <site id="main">
+        <resource id="test-orm-hj-rminf" displayName="测试hj-rminf" icon="ion:grid-outline" resourceType="TOPM"
+                  orderNo="10000" routePath="/test-orm-hj-rminf" component="layouts/default/index">
+            <children>
+                <resource id="RminfJgVehicleinfo-main" displayName="集光过车（超员）" orderNo="10001"
+                          icon="ant-design:appstore-twotone" component="AMIS" resourceType="SUBM"
+                          url="/hj/rminf/pages/RminfJgVehicleinfo/main.page.yaml">
+                    <children>
+                        <resource id="FNPT:RminfJgVehicleinfo:query" displayName="查询集光过车（超员）" orderNo="10002"
+                                  resourceType="FNPT">
+                            <permissions>RminfJgVehicleinfo:query</permissions>
+                        </resource>
+                        <resource id="FNPT:RminfJgVehicleinfo:mutation" displayName="修改集光过车（超员）" orderNo="10003"
+                                  resourceType="FNPT">
+                            <permissions>RminfJgVehicleinfo:mutation</permissions>
+                        </resource>
+                    </children>
+                </resource>
+            </children>
+        </resource>
+    </site>
+</auth>

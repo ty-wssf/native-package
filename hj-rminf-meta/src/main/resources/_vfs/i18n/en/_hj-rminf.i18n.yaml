@@ -1,0 +1,11 @@
+entity:
+  label:
+    RminfJgVehicleinfo: null
+prop:
+  label:
+    RminfJgVehicleinfo:
+      id_: null
+      kkbh: null
+      addTime: null
+      updateTime: null
+      deleted: null

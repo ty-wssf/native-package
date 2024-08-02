@@ -3,66 +3,28 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <groupId>org.noear</groupId>
-        <artifactId>solon-parent</artifactId>
-        <version>2.8.4</version>
-        <relativePath/>
+        <artifactId>nop-entropy</artifactId>
+        <groupId>io.github.entropy-cloud</groupId>
+        <version>2.0.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.hj</groupId>
 
-    <artifactId>hj-demo</artifactId>
+    <artifactId>hj-rminf</artifactId>
 
     <version>1.0.0</version>
 
     <packaging>pom</packaging>
 
-    <properties>
-        <nop-entropy.version>2.0.0-SNAPSHOT</nop-entropy.version>
-        <solon.version>2.8.4</solon.version>
-    </properties>
-
     <modules>
-        <module>hj-demo-codegen</module>
-        <module>hj-demo-api</module>
-        <module>hj-demo-dao</module>
-        <module>hj-demo-meta</module>
-        <module>hj-demo-service</module>
-        <module>hj-demo-web</module>
-        <module>hj-demo-app</module>
+        <module>hj-rminf-codegen</module>
+        <module>hj-rminf-api</module>
+        <module>hj-rminf-dao</module>
+        <module>hj-rminf-meta</module>
+        <module>hj-rminf-service</module>
+        <module>hj-rminf-web</module>
+        <module>hj-rminf-app</module>
     </modules>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.github.entropy-cloud</groupId>
-                <artifactId>nop-bom</artifactId>
-                <version>${nop-entropy.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <repositories>
-        <!--<repository>
-            <id>central</id>
-            <url>https://mirrors.cloud.tencent.com/nexus/repository/maven-public/</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>-->
-        <repository>
-            <id>nop-snapshot-repo</id>
-            <url>https://nop.repo.crazydan.io/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 </project>
