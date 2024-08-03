@@ -17,8 +17,6 @@ solon:
   app:
     group: network-proxy
     name: network-proxy-app
-  config:
-    add: ./app.yml
 
 solon.logging.appender:
   console:
@@ -38,3 +36,5 @@ solon.logging.logger:
     level: WARN
   "com.zaxxer.hikari":
     level: WARN
+
+solon.config.add: "./app.yml"
