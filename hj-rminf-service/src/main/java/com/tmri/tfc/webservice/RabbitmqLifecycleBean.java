@@ -4,11 +4,12 @@ import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import jakarta.xml.ws.Endpoint;
 import org.noear.solon.Solon;
 import org.noear.solon.Utils;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.core.bean.LifecycleBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.charset.StandardCharsets;
 
@@ -19,6 +20,8 @@ import java.nio.charset.StandardCharsets;
 @Component
 public class RabbitmqLifecycleBean implements LifecycleBean {
 
+    private Logger log = LoggerFactory.getLogger(RabbitmqLifecycleBean.class);
+
     private ConnectionFactory connectionFactory;
     private Connection connection;
     private Channel channel;
@@ -26,7 +29,9 @@ public class RabbitmqLifecycleBean implements LifecycleBean {
 
     @Override
     public void start() throws Throwable {
+        log.info("1111111111111111111");
         if (!Solon.cfg().getBool("solon.aot", false)) {
+            log.info("222222222222222222");
             String host = Solon.cfg().get("solon.cloud.rabbitmq.server").split(":")[0];
             int port = Integer.parseInt(Solon.cfg().get("solon.cloud.rabbitmq.server").split(":")[1]);
 
@@ -59,8 +64,9 @@ public class RabbitmqLifecycleBean implements LifecycleBean {
             channel.confirmSelect();
             eventPropsDefault = newEventProps().build();
 
-            Endpoint.publish(Solon.cfg().get("webservice.addr"), new TransWebServiceImpl());
+            // Endpoint.publish(Solon.cfg().get("webservice.addr"), new TransWebServiceImpl());
         }
+        log.info("333333333333333333333");
     }
 
     public boolean basicPublish(String exchangeName, String topic, String event_data) throws Exception {
