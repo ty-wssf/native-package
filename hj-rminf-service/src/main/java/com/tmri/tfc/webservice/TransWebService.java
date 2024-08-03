@@ -1,22 +1,14 @@
-/*
 package com.tmri.tfc.webservice;
 
-import io.nop.commons.util.StringHelper;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
 
-*/
 /**
  * @author wyl
  * @date 2024年08月02日 18:00
- *//*
-
-@WebService(*/
-/*name = "Trans", *//*
-serviceName = "Trans", // 与接口中指定的name一致, 都可以不写
-        */
-/*targetNamespace = ""*//*
- // 与接口中的命名空间一致,一般是接口的包名倒，都可以不用写
+ */
+@WebService(/*name = "Trans", */serviceName = "Trans", // 与接口中指定的name一致, 都可以不写
+        /*targetNamespace = ""*/ // 与接口中的命名空间一致,一般是接口的包名倒，都可以不用写
         targetNamespace = "http://webservice.tfc.tmri.com/" // 与接口中的命名空间一致,一般是接口的包名倒，都可以不用写
 )
 public interface TransWebService {
@@ -54,4 +46,3 @@ public interface TransWebService {
                                  @WebParam(name = "zkrs") String zkrs);
 
 }
-*/
