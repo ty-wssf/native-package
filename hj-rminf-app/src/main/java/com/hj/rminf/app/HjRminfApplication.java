@@ -37,9 +37,9 @@ public class HjRminfApplication {
                 }
             });*/
         });
-        if (!Solon.cfg().getBool("solon.aot", false)) {
+        /*if (!Solon.cfg().getBool("solon.aot", false)) {
             Endpoint.publish(Solon.cfg().get("webservice.addr"), new TransWebServiceImpl());
-        }
+        }*/
         // WebServiceHelper.createWebClient(Solon.cfg().get("webservice.addr"), TransWebService.class);
         // EndpointImpl endpoint = new EndpointImpl(BusFactory.getDefaultBus(), new TransWebServiceImpl());
         // endpoint.publish("/service");
