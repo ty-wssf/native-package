@@ -1,8 +1,6 @@
 
 package com.hj.rminf.app;
 
-import com.tmri.tfc.webservice.TransWebServiceImpl;
-import jakarta.xml.ws.Endpoint;
 import org.noear.solon.Solon;
 import org.noear.solon.annotation.Import;
 import org.noear.solon.annotation.SolonMain;
@@ -37,12 +35,6 @@ public class HjRminfApplication {
                 }
             });*/
         });
-        /*if (!Solon.cfg().getBool("solon.aot", false)) {
-            Endpoint.publish(Solon.cfg().get("webservice.addr"), new TransWebServiceImpl());
-        }*/
-        // WebServiceHelper.createWebClient(Solon.cfg().get("webservice.addr"), TransWebService.class);
-        // EndpointImpl endpoint = new EndpointImpl(BusFactory.getDefaultBus(), new TransWebServiceImpl());
-        // endpoint.publish("/service");
     }
 
 }
