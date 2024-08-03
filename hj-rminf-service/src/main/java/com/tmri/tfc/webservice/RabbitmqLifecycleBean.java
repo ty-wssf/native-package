@@ -26,7 +26,7 @@ public class RabbitmqLifecycleBean implements LifecycleBean {
 
     @Override
     public void start() throws Throwable {
-        if (!NativeDetector.isNotAotRuntime()) {
+        if (!Solon.cfg().getBool("solon.aot", false)) {
             String host = Solon.cfg().get("solon.cloud.rabbitmq.server").split(":")[0];
             int port = Integer.parseInt(Solon.cfg().get("solon.cloud.rabbitmq.server").split(":")[1]);
 

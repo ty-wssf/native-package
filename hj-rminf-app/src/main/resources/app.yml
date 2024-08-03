@@ -13,6 +13,7 @@ solon.cloud.rabbitmq:
   topic: BCHT.ITS.DATA.TOPIC
 
 solon:
+  aot: true
   app:
     group: network-proxy
     name: network-proxy-app
