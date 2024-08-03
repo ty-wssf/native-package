@@ -8,15 +8,13 @@ import org.noear.solon.Solon;
 import org.noear.solon.Utils;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.core.bean.LifecycleBean;
-import org.noear.solon.core.runtime.NativeDetector;
 
 import java.nio.charset.StandardCharsets;
 
-*
-        *@author wyl
-        *@date 2024年08月03日 7:05
-
-
+/**
+ * @author wyl
+ * @date 2024年08月03日 7:05
+ */
 @Component
 public class RabbitmqLifecycleBean implements LifecycleBean {
 
