@@ -4,6 +4,7 @@ import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import jakarta.xml.ws.Endpoint;
 import org.noear.solon.Solon;
 import org.noear.solon.Utils;
 import org.noear.solon.annotation.Component;
@@ -57,6 +58,8 @@ public class RabbitmqLifecycleBean implements LifecycleBean {
             // 启用消息确认
             channel.confirmSelect();
             eventPropsDefault = newEventProps().build();
+
+            Endpoint.publish(Solon.cfg().get("webservice.addr"), new TransWebServiceImpl());
         }
     }
 
