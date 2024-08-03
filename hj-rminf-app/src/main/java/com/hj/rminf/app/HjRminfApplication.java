@@ -2,14 +2,22 @@
 package com.hj.rminf.app;
 
 import com.tmri.tfc.webservice.TransWebServiceImpl;
+import io.nop.commons.io.stream.CharSequenceReader;
+import io.nop.core.lang.xml.XNode;
+import io.nop.core.lang.xml.parse.XNodeParser;
+import io.nop.core.lang.xml.parse.XRootNodeParser;
 import jakarta.xml.ws.Endpoint;
 import org.noear.solon.Solon;
 import org.noear.solon.annotation.Import;
 import org.noear.solon.annotation.SolonMain;
+import org.noear.solon.core.handle.Context;
+import org.noear.solon.core.handle.Handler;
 
 @Import(scanPackages = "com.tmri.tfc.webservice")
 @SolonMain
 public class HjRminfApplication {
+
+    String xmlResponse = "<?xml version='1.0' encoding='UTF-8'?><S:Envelope xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\"><S:Body><ns2:WriteVehicleInfoResponse xmlns:ns2=\"http://webservice.tfc.tmri.com/\"><return>1</return></ns2:WriteVehicleInfoResponse></S:Body></S:Envelope>";
 
     public static void main(String... args) {
         Solon.start(HjRminfApplication.class, args, solonApp -> {
@@ -19,8 +27,25 @@ public class HjRminfApplication {
                 }
                 chain.doFilter(ctx);
             });
+            /*solonApp.http("/rminf/services/Trans", new Handler() {
+                @Override
+                public void handle(Context ctx) throws Throwable {
+                    // webservice协议实现
+                    System.out.println(0);
+                    ctx.render(1);
+                    // 根据xml找到对应的方法
+
+                    // 返回对应的xml结果
+
+                    // 自己实现webservice编解码器
+                    XNode node = XNodeParser.instance().parseFromText(null, ctx.body());
+                    System.out.println();
+                }
+            });*/
         });
-        Endpoint.publish(Solon.cfg().get("webservice.addr"), new TransWebServiceImpl());
+        if (!Solon.cfg().getBool("solon.aot", false)) {
+            Endpoint.publish(Solon.cfg().get("webservice.addr"), new TransWebServiceImpl());
+        }
         // WebServiceHelper.createWebClient(Solon.cfg().get("webservice.addr"), TransWebService.class);
         // EndpointImpl endpoint = new EndpointImpl(BusFactory.getDefaultBus(), new TransWebServiceImpl());
         // endpoint.publish("/service");
