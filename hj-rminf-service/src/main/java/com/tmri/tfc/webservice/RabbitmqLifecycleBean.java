@@ -1,3 +1,4 @@
+/*
 package com.tmri.tfc.webservice;
 
 import com.rabbitmq.client.AMQP;
@@ -12,10 +13,12 @@ import org.noear.solon.core.runtime.NativeDetector;
 
 import java.nio.charset.StandardCharsets;
 
+*/
 /**
  * @author wyl
  * @date 2024年08月03日 7:05
- */
+ *//*
+
 @Component
 public class RabbitmqLifecycleBean implements LifecycleBean {
 
@@ -74,3 +77,4 @@ public class RabbitmqLifecycleBean implements LifecycleBean {
     }
 
 }
+*/

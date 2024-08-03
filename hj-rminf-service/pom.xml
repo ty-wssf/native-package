@@ -55,17 +55,17 @@
             <artifactId>solonx-webservices</artifactId>
             <version>1.0.0</version>
         </dependency>-->
-        <dependency>
+        <!--<dependency>
             <groupId>jakarta.xml.ws</groupId>
             <artifactId>jakarta.xml.ws-api</artifactId>
             <version>4.0.2</version>
         </dependency>
-        <!-- JAX-WS RI -->
+        &lt;!&ndash; JAX-WS RI &ndash;&gt;
         <dependency>
             <groupId>com.sun.xml.ws</groupId>
             <artifactId>jaxws-rt</artifactId>
             <version>4.0.3</version>
-        </dependency>
+        </dependency>-->
         <!--<dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-core</artifactId>
@@ -85,16 +85,16 @@
             <groupId>org.noear</groupId>
             <artifactId>solon</artifactId>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
-           <!-- <version>5.0.0</version>-->
+           &lt;!&ndash; <version>5.0.0</version>&ndash;&gt;
         </dependency>
         <dependency>
             <groupId>com.rabbitmq</groupId>
             <artifactId>amqp-client</artifactId>
             <version>${rabbitmq.version}</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.noear</groupId>
             <artifactId>snack3</artifactId>

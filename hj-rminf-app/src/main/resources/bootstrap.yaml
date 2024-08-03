@@ -2,4 +2,4 @@ nop:
   profile: dev
 
 "%dev":
-  nop.codegen.trace.enabled: false
+  nop.codegen.trace.enabled: true

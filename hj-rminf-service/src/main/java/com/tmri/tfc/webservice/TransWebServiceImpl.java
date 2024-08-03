@@ -1,3 +1,4 @@
+/*
 package com.tmri.tfc.webservice;
 
 import com.hj.rminf.dao.entity.RminfJgVehicleinfo;
@@ -13,20 +14,26 @@ import org.noear.solon.core.bean.LifecycleBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+*/
 /**
  * @author wyl
  * @date 2024年08月01日 15:48
- */
+ *//*
+
 // @BindingType("http://java.sun.com/xml/ns/jaxws/2003/05/soap/bindings/HTTP/")
-@WebService(/*name = "Trans", */serviceName = "Trans", // 与接口中指定的name一致, 都可以不写
+@WebService(*/
+/*name = "Trans", *//*
+serviceName = "Trans", // 与接口中指定的name一致, 都可以不写
         // targetNamespace = "" // 与接口中的命名空间一致,一般是接口的包名倒，都可以不用写
         targetNamespace = "http://webservice.tfc.tmri.com/" // 与接口中的命名空间一致,一般是接口的包名倒，都可以不用写
 )
 public class TransWebServiceImpl implements TransWebService {
 
     private Logger log = LoggerFactory.getLogger(TransWebServiceImpl.class);
-    /*@Autowired
-    private RabbitTemplate rabbitTemplate;*/
+    */
+/*@Autowired
+    private RabbitTemplate rabbitTemplate;*//*
+
 
     public long InitTrans(@WebParam(name = "kkbh") String kkbh,
                           @WebParam(name = "fxlx") String fxlx,
@@ -110,3 +117,4 @@ public class TransWebServiceImpl implements TransWebService {
 
 
 }
+*/
