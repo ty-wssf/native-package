@@ -45,7 +45,7 @@ jobs:
           set MAVEN_OPTS="-Duser.language=UTF-8 -Dfile.encoding=UTF-8"
           cd hj-rminf-app
           mvn clean package --file pom.xml --no-transfer-progress
-          mvn clean native:compile-no-fork -P native --file pom.xml --no-transfer-progress
+          mvn clean native:compile -P native --file pom.xml --no-transfer-progress
 
       - name: Upload artifacts app
         uses: actions/upload-artifact@v3
