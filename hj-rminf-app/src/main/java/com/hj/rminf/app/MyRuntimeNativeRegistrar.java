@@ -45,6 +45,12 @@ public class MyRuntimeNativeRegistrar implements RuntimeNativeRegistrar {
         metadata.registerReflection(XNodeParser.class, MemberCategory.values());
         metadata.registerReflection(XModelInclude.class, MemberCategory.values());
 
+        metadata.registerArg("-J--add-opens=java.base/java.lang.invoke=ALL-UNNAMED");
+        metadata.registerArg("-J--add-opens=java.base/java.nio=ALL-UNNAMED");
+        metadata.registerArg("-J--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED");
+
+        metadata.registerArg("-march=compatibility");
+
     }
 
 }
