@@ -43,6 +43,7 @@ public class MyRuntimeNativeRegistrar implements RuntimeNativeRegistrar {
 
         // 注册静态资源
         metadata.registerResourceExclude("nop-vfs-index.txt");
+        metadata.registerResourceExclude("_vfs/nop/schema/register-model.xdef");
 
         metadata.registerArg("-J--add-opens=java.base/java.lang.invoke=ALL-UNNAMED");
         metadata.registerArg("-J--add-opens=java.base/java.nio=ALL-UNNAMED");
