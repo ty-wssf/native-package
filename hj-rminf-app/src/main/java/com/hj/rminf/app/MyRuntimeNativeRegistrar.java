@@ -1,5 +1,6 @@
 package com.hj.rminf.app;
 
+import io.nop.auth.core.filter.AuthFilterConfig;
 import io.nop.core.lang.xml.parse.XNodeParser;
 import io.nop.core.model.object.DynamicObject;
 import io.nop.excel.imp.model.ImportFieldModel;
@@ -44,6 +45,7 @@ public class MyRuntimeNativeRegistrar implements RuntimeNativeRegistrar {
         metadata.registerReflection(NopSysCheckerRecordBizModel.class, MemberCategory.values());
         metadata.registerReflection(XNodeParser.class, MemberCategory.values());
         metadata.registerReflection(XModelInclude.class, MemberCategory.values());
+        metadata.registerReflection(AuthFilterConfig.class, MemberCategory.values());
 
         metadata.registerArg("-J--add-opens=java.base/java.lang.invoke=ALL-UNNAMED");
         metadata.registerArg("-J--add-opens=java.base/java.nio=ALL-UNNAMED");
