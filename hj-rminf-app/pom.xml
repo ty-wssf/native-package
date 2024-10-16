@@ -135,6 +135,10 @@
             <plugin>
                 <groupId>org.noear</groupId>
                 <artifactId>solon-maven-plugin</artifactId>
+                <configuration>
+                    <!-- 指定启动主类 -->
+                    <mainClass>com.hj.rminf.app.HjRminfApplication</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>
