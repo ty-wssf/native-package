@@ -8,6 +8,7 @@ import io.nop.excel.imp.model.ImportSheetModel;
 import io.nop.excel.imp.util.ImportDataHelper;
 import io.nop.rule.core.model.*;
 import io.nop.sys.service.entity.NopSysCheckerRecordBizModel;
+import io.nop.xlang.feature.XModelInclude;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.aot.RuntimeNativeMetadata;
 import org.noear.solon.aot.RuntimeNativeRegistrar;
@@ -42,6 +43,7 @@ public class MyRuntimeNativeRegistrar implements RuntimeNativeRegistrar {
 
         metadata.registerReflection(NopSysCheckerRecordBizModel.class, MemberCategory.values());
         metadata.registerReflection(XNodeParser.class, MemberCategory.values());
+        metadata.registerReflection(XModelInclude.class, MemberCategory.values());
 
     }
 
