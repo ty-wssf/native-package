@@ -18,13 +18,18 @@
     </properties>
 
     <dependencies>
-        <!--<dependency>
+        <dependency>
             <artifactId>hj-rminf-service</artifactId>
             <groupId>com.hj</groupId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
             <artifactId>hj-rminf-web</artifactId>
+            <groupId>com.hj</groupId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <artifactId>hj-rminf-delta</artifactId>
             <groupId>com.hj</groupId>
             <version>1.0.0</version>
         </dependency>
@@ -44,7 +49,17 @@
         <dependency>
             <groupId>io.github.entropy-cloud</groupId>
             <artifactId>nop-sys-service</artifactId>
-        </dependency>-->
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.entropy-cloud</groupId>
+            <artifactId>nop-rule-service</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.entropy-cloud</groupId>
+            <artifactId>nop-rule-web</artifactId>
+        </dependency>
 
         <!-- 引入集算器支持。如果不需要可以删除 -->
         <!--        <dependency>-->
@@ -52,10 +67,14 @@
         <!--            <artifactId>nop-report-spl</artifactId>-->
         <!--        </dependency>-->
 
-        <!-- <dependency>
-             <groupId>io.github.entropy-cloud</groupId>
-             <artifactId>nop-web-amis-editor</artifactId>
-         </dependency>-->
+        <dependency>
+            <groupId>io.github.entropy-cloud</groupId>
+            <artifactId>nop-web-amis-editor</artifactId>
+        </dependency>
+        <!--<dependency>
+            <groupId>io.github.entropy-cloud</groupId>
+            <artifactId>nop-web-site</artifactId>
+        </dependency>-->
 
         <!-- 般在主模块里引入 http-server 相关组件（方便切换选择不同的方案） -->
         <dependency>
@@ -80,11 +99,11 @@
             <groupId>org.noear</groupId>
             <artifactId>solon.logging.logback</artifactId>
         </dependency>
-        <!--<dependency>
+        <dependency>
             <groupId>io.github.entropy-cloud.extensions</groupId>
             <artifactId>nop-solon-plugin</artifactId>
             <version>1.0.0-SNAPSHOT</version>
-        </dependency>-->
+        </dependency>
         <dependency>
             <groupId>org.noear</groupId>
             <artifactId>solon.aot</artifactId>
@@ -92,6 +111,20 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <!--<scope>test</scope>-->
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-core</artifactId>
         </dependency>
     </dependencies>
 

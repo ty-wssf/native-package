@@ -3,13 +3,16 @@ package com.tmri.tfc.webservice;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 /**
  * @author wyl
  * @date 2024年08月02日 18:00
  */
 @WebService(/*name = "Trans", */serviceName = "Trans", // 与接口中指定的name一致, 都可以不写
-        /*targetNamespace = ""*/ // 与接口中的命名空间一致,一般是接口的包名倒，都可以不用写
-        targetNamespace = "http://webservice.tfc.tmri.com/" // 与接口中的命名空间一致,一般是接口的包名倒，都可以不用写
+        targetNamespace = "" // 与接口中的命名空间一致,一般是接口的包名倒，都可以不用写
+        // targetNamespace = "http://webservice.tfc.tmri.com/" // 与接口中的命名空间一致,一般是接口的包名倒，都可以不用写
 )
 public interface TransWebService {
 
@@ -23,7 +26,7 @@ public interface TransWebService {
                                  @WebParam(name = "cdh") String cdh,
                                  @WebParam(name = "hphm") String hphm,
                                  @WebParam(name = "hpzl") String hpzl,
-                                 @WebParam(name = "gcsj") String gcsj,
+                                 @WebParam(name = "gcsj") LocalDateTime gcsj,
                                  @WebParam(name = "clsd") String clsd,
                                  @WebParam(name = "clxs") String clxs,
                                  @WebParam(name = "wfdm") String wfdm,
@@ -43,6 +46,6 @@ public interface TransWebService {
                                  @WebParam(name = "tztp") String tztp,
                                  @WebParam(name = "cid") String cid,
                                  @WebParam(name = "tid") String tid,
-                                 @WebParam(name = "zkrs") String zkrs);
+                                 @WebParam(name = "zkrs") Integer zkrs);
 
 }

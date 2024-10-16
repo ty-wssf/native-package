@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <auth x:extends="_hj-rminf.action-auth.xml" x:schema="/nop/schema/action-auth.xdef" xmlns:x="/nop/schema/xdsl.xdef">
 
-    <site id="main"/>
+    <site id="main">
+        <resource id="RminfJgVehicleinfo-main" displayName="集光过车（超员）" orderNo="9000"
+                  icon="ant-design:appstore-twotone" component="AMIS" resourceType="SUBM"
+                  url="/hj/rminf/pages/RminfJgVehicleinfo/main.page.yaml">
+            <children>
+                <resource id="FNPT:RminfJgVehicleinfo:query" displayName="查询集光过车（超员）" orderNo="10002"
+                          resourceType="FNPT">
+                    <permissions>RminfJgVehicleinfo:query</permissions>
+                </resource>
+                <resource id="FNPT:RminfJgVehicleinfo:mutation" displayName="修改集光过车（超员）" orderNo="10003"
+                          resourceType="FNPT">
+                    <permissions>RminfJgVehicleinfo:mutation</permissions>
+                </resource>
+            </children>
+        </resource>
+
+        <!--
+       正式部署的时候应该设置为x:override="remove"
+       -->
+        <resource id="test-orm-hj-rminf" x:override="remove"/>
+    </site>
 </auth>

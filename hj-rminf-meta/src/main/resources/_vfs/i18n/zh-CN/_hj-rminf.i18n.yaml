@@ -4,12 +4,35 @@ entity:
 prop:
   label:
     RminfJgVehicleinfo:
-      addTime: 创建时间
-      deleted: 逻辑删除
+      cdh: 车道号
+      cid: Rfid卡号
+      cllx: 车辆类型
+      clpp: 车辆品牌
+      clsd: 车辆速度
+      clwx: 车辆外形
+      clxs: 车辆限速
+      createTime: 创建时间
+      csys: 车身颜色
+      cwkc: 车外廓长
+      fxlx: 方向类型
+      fzhphm: 辅助号牌号码
+      fzhpys: 辅助号牌颜色
+      fzhpzl: 辅助号牌种类
+      gcsj: 过车时间
       hphm: 号牌号码
+      hpys: 号牌颜色
+      hpzl: 号牌种类
       id_: Id
       kkbh: 卡口编号
+      tid: Rfid卡号
       tp1: 通行图片1
+      tp1ComponentFileStatus: null
       tp2: 通行图片2
+      tp2ComponentFileStatus: null
       tp3: 通行图片3
-      updateTime: 更新时间
+      tp3ComponentFileStatus: null
+      tplj: 通行图片路径
+      tztp: 特征图片
+      updateTime: 修改时间
+      wfdm: 违章行为编码
+      zkrs: 载客人数

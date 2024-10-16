@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<auth x:extends="hj-rminf.action-auth.xml" x:schema="/nop/schema/action-auth.xdef" xmlns:x="/nop/schema/xdsl.xdef">
+<auth x:extends="hj-rminf.action-auth.xml,/nop/rule/auth/nop-rule.action-auth.xml" x:schema="/nop/schema/action-auth.xdef" xmlns:x="/nop/schema/xdsl.xdef">
 
-    <site id="main"/>
+    <site id="main">
+        <resource id="test-orm-nop-rule" displayName="规则引擎" x:override="merge"/>
+    </site>
 </auth>

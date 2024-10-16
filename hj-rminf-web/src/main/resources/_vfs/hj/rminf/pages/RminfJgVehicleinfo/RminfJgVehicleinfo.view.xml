@@ -10,6 +10,11 @@
     <forms>
         <form id="view"/>
         <form id="edit"/>
+        <form id="query" editMode="query" title="查询条件" i18n-en:title="Query Condition" x:abstract="false">
+            <layout>
+                kkbh[卡口编号] hphm[号牌号码] gcsj[过车时间]
+            </layout>
+        </form>
     </forms>
 
     <pages>

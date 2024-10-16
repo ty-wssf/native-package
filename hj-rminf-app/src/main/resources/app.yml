@@ -1,9 +1,12 @@
+solon:
+  app:
+    group: hj-rminf
+    name: hj-rminf-app
 server:
+  ip: 10.20.11.147
   port: 8081
   http.gzip.enable: true
-webservice.addr: http://10.20.11.147:8080/rminf/services/Trans
-soap.force.doclit.bare: true
-server.webservices.path: "/rminf/services/" #默认为 ws
+server.webservices.path: "/rminf/services/"
 
 solon.cloud.rabbitmq:
   server: "10.20.10.5:5672"    #服务地址
@@ -11,12 +14,22 @@ solon.cloud.rabbitmq:
   password: Bcht123            #链接密码
   exchangeName: BCHT.ITS.DATA
   topic: BCHT.ITS.DATA.TOPIC
+RminfJgVehicleinfo:
+  convert-image: true
 
-solon:
-  aot: true
-  app:
-    group: network-proxy
-    name: network-proxy-app
+# 文件存储路径
+nop:
+  file:
+    store-dir: H:\\test3
+  datasource:
+    driver-class-name: org.h2.Driver
+    jdbc-url: jdbc:h2:./db/test
+    username: sa
+    password:
+    # driver-class-name: com.mysql.cj.jdbc.Driver
+    # jdbc-url: jdbc:mysql://10.20.10.152:30007/hj-rminf?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    # username: root
+    # password: bcht@123
 
 solon.logging.appender:
   console:
@@ -36,5 +49,10 @@ solon.logging.logger:
     level: WARN
   "com.zaxxer.hikari":
     level: WARN
+  "io.nop.dao":
+    level: WARN
+  "io.nop.core.lang.sql":
+    level: WARN
+
 
 solon.config.add: "./app.yml"
