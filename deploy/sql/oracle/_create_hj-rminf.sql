@@ -26,7 +26,7 @@ CREATE TABLE rminf_jg_vehicleinfo(
   TZTP VARCHAR2(32)  ,
   CID VARCHAR2(32)  ,
   TID VARCHAR2(32)  ,
-  ZKRS VARCHAR2(32)   default '0' ,
+  ZKRS VARCHAR2(32) default '0'   ,
   CREATE_TIME DATE NOT NULL ,
   UPDATE_TIME DATE NOT NULL ,
   constraint PK_rminf_jg_vehicleinfo primary key (ID)

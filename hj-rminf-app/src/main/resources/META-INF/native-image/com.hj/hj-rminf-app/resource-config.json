@@ -29,9 +29,6 @@
     },
     {
       "pattern": "_conf/*.*"
-    },
-    {
-      "pattern": "_conf/*.*"
     }
   ]
 }

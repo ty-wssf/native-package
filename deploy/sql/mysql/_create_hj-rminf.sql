@@ -6,7 +6,7 @@ CREATE TABLE rminf_jg_vehicleinfo(
   CDH VARCHAR(32) NULL    COMMENT '车道号',
   HPHM VARCHAR(32) NULL    COMMENT '号牌号码',
   HPZL VARCHAR(32) NULL    COMMENT '号牌种类',
-  GCSJ TIMESTAMP NULL    COMMENT '过车时间',
+  GCSJ TIMESTAMP(3) NULL    COMMENT '过车时间',
   CLSD VARCHAR(32) NULL    COMMENT '车辆速度',
   CLXS VARCHAR(32) NULL    COMMENT '车辆限速',
   WFDM VARCHAR(32) NULL    COMMENT '违章行为编码',
@@ -26,7 +26,7 @@ CREATE TABLE rminf_jg_vehicleinfo(
   TZTP VARCHAR(32) NULL    COMMENT '特征图片',
   CID VARCHAR(32) NULL    COMMENT 'Rfid卡号',
   TID VARCHAR(32) NULL    COMMENT 'Rfid卡号',
-  ZKRS VARCHAR(32) NULL  default '0'    COMMENT '载客人数',
+  ZKRS VARCHAR(32) default '0'  NULL    COMMENT '载客人数',
   CREATE_TIME DATETIME NOT NULL    COMMENT '创建时间',
   UPDATE_TIME DATETIME NOT NULL    COMMENT '修改时间',
   constraint PK_rminf_jg_vehicleinfo primary key (ID)

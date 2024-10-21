@@ -1,32 +1,27 @@
 package com.hj.rminf.service.config;
 
-import io.vertx.core.Verticle;
+import com.hj.rminf.service.HttpProtocolServer;
+import com.hj.rminf.service.SmartTerminalProtocolServer;
+import io.nop.commons.service.LifeCycleSupport;
 import io.vertx.core.Vertx;
-import org.noear.solon.Solon;
-import org.noear.solon.annotation.Bean;
-import org.noear.solon.annotation.Configuration;
-import org.noear.solon.annotation.Inject;
-import org.noear.solon.core.bean.LifecycleBean;
 
-@Configuration
-public class VertxConfig implements LifecycleBean {
-    @Inject
-    Vertx vertx;
+public class VertxConfig extends LifeCycleSupport {
 
-    @Bean
-    public Vertx vertx(){
-        return Vertx.vertx(); //主要是给别的地方注入用
+    private Vertx vertx;
+
+    @Override
+    protected void doStart() {
+        vertx = Vertx.vertx();
+        // 智能终端设备协议服务
+        vertx.deployVerticle(new SmartTerminalProtocolServer());
+
+        // http协议服务
+        vertx.deployVerticle(new HttpProtocolServer());
     }
 
     @Override
-    public void start() throws Throwable {
-        for(Verticle verticle : Solon.context().getBeansOfType(Verticle.class)){
-            vertx.deployVerticle(verticle);
-        }
-    }
-
-    @Override
-    public void stop() throws Throwable {
+    protected void doStop() {
         vertx.close();
     }
+
 }

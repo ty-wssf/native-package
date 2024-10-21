@@ -19,6 +19,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>io.github.entropy-cloud</groupId>
+            <artifactId>nop-quarkus-web-orm-starter</artifactId>
+        </dependency>
+        <dependency>
             <artifactId>hj-rminf-service</artifactId>
             <groupId>com.hj</groupId>
             <version>1.0.0</version>
@@ -29,113 +33,73 @@
             <version>1.0.0</version>
         </dependency>
         <dependency>
-            <artifactId>hj-rminf-delta</artifactId>
-            <groupId>com.hj</groupId>
-            <version>1.0.0</version>
-        </dependency>
-
-        <!--<dependency>
             <groupId>io.github.entropy-cloud</groupId>
             <artifactId>nop-auth-web</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.entropy-cloud</groupId>
             <artifactId>nop-auth-service</artifactId>
-        </dependency>-->
-        <!--<dependency>
-            <groupId>io.github.entropy-cloud</groupId>
-            <artifactId>nop-sys-web</artifactId>
-        </dependency>-->
-        <dependency>
-            <groupId>io.github.entropy-cloud</groupId>
-            <artifactId>nop-sys-service</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>io.github.entropy-cloud</groupId>
-            <artifactId>nop-rule-service</artifactId>
-        </dependency>
-
-        <!--<dependency>
-            <groupId>io.github.entropy-cloud</groupId>
-            <artifactId>nop-rule-web</artifactId>
-        </dependency>-->
-
-        <!-- 引入集算器支持。如果不需要可以删除 -->
-        <!--        <dependency>-->
-        <!--            <groupId>io.github.entropy-cloud</groupId>-->
-        <!--            <artifactId>nop-report-spl</artifactId>-->
-        <!--        </dependency>-->
-
         <dependency>
             <groupId>io.github.entropy-cloud</groupId>
             <artifactId>nop-web-amis-editor</artifactId>
         </dependency>
-        <!--<dependency>
+        <dependency>
             <groupId>io.github.entropy-cloud</groupId>
             <artifactId>nop-web-site</artifactId>
-        </dependency>-->
-
-        <!-- 般在主模块里引入 http-server 相关组件（方便切换选择不同的方案） -->
-        <dependency>
-            <groupId>org.noear</groupId>
-            <artifactId>solon-api</artifactId>
-        </dependency>
-        <!--<dependency>
-            <groupId>org.noear</groupId>
-            <artifactId>solon.web.servlet</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.noear</groupId>
-            <artifactId>solon.boot.undertow</artifactId>
-        </dependency>-->
-        <!--<dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-server</artifactId>
-            <version>${jetty.version}</version> &lt;!&ndash; 根据你的需求选择合适的版本号 &ndash;&gt;
-        </dependency>-->
-
-        <dependency>
-            <groupId>org.noear</groupId>
-            <artifactId>solon.logging.logback</artifactId>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jdbc-mysql</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.github.entropy-cloud.extensions</groupId>
-            <artifactId>nop-solon-plugin</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.noear</groupId>
-            <artifactId>solon.aot</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <!--<scope>test</scope>-->
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-core</artifactId>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jdbc-h2</artifactId>
         </dependency>
     </dependencies>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
-
         <plugins>
             <plugin>
-                <groupId>org.noear</groupId>
-                <artifactId>solon-maven-plugin</artifactId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire-plugin.version}</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                        <maven.home>${maven.home}</maven.home>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-maven-plugin</artifactId>
+                <version>${quarkus.platform.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>native</id>
+            <activation>
+                <property>
+                    <name>native</name>
+                </property>
+            </activation>
+            <properties>
+                <quarkus.package.type>native</quarkus.package.type>
+            </properties>
+        </profile>
+    </profiles>
 </project>

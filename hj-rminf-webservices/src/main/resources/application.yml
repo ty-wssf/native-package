@@ -1,9 +1,0 @@
-spring:
-  rabbitmq:
-    host: 10.20.10.5
-    port: 5672
-    username: ahbcht
-    password: Bcht123
-    template:
-      exchange: BCHT.ITS.DATA
-      routing-key: BCHT.ITS.DATA
