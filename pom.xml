@@ -28,7 +28,7 @@
         <module>hj-rminf-app</module>
     </modules>
 
-    <repositories>
+    <!--<repositories>
         <repository>
             <id>central</id>
             <url>https://mirrors.cloud.tencent.com/nexus/repository/maven-public/</url>
@@ -40,7 +40,7 @@
             <id>nop-repo</id>
             <url>https://nop.repo.crazydan.io/</url>
         </repository>
-    </repositories>
+    </repositories>-->
 
     <pluginRepositories>
         <pluginRepository>
