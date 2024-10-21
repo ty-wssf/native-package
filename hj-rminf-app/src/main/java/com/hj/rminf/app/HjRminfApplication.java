@@ -25,6 +25,7 @@ public class HjRminfApplication {
         CoreInitialization.destroy();
     }
 
+    // 111
     public static void main(String... args) {
         globalArgs = args;
         Quarkus.run(args);
