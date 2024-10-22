@@ -36,7 +36,7 @@ public class GpsYdHandle implements Handler<RoutingContext> {
                         // 处理gps数据
                         JsonObject gpsJson = new JsonObject();
                         gpsJson.put("lsh", StringHelper.generateUUID());
-                        gpsJson.put("sbbh", receiveJson.getString("sbbh"));
+                        gpsJson.put("sbbh", receiveJson.getString("deviceId"));
                         gpsJson.put("sbsj", receiveJson.getString("at"));
                         gpsJson.put("jd", receiveJson.getString("longitude"));
                         gpsJson.put("wd", receiveJson.getString("latitude"));
@@ -95,6 +95,9 @@ public class GpsYdHandle implements Handler<RoutingContext> {
 
         try {
             // 连接FTP服务器
+            if (!ftpClient.isAvailable()) {
+                ftpClient = null;
+            }
             if (ftpClient == null) {
                 synchronized (this) {
                     if (ftpClient == null) {
