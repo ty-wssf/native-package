@@ -14,6 +14,7 @@ public interface HjRminfConfigs {
     IConfigReference<Integer> VERTX_HTTP_PORT = varRef(s_loc, "vertx.http.port", Integer.class,
             8081);
 
+    // 移动警车gps业务相关配置
     @Description("警车GPS数据上传ftp path")
     IConfigReference<String> HJ_JC_GPS_PATH = varRef(s_loc, "hj.jc.gps.ftp.path", String.class,
             "/TRAFFIC_GIS");
@@ -33,5 +34,13 @@ public interface HjRminfConfigs {
     @Description("警车GPS数据上传ftp password")
     IConfigReference<String> HJ_JC_GPS_FTP_PASSWORD = varRef(s_loc, "hj.jc.gps.ftp.password", String.class,
             "wu@fang@top");
+
+    // 百诚终端对接相关配置
+    @Description("百诚智能终端业务功能是否启用")
+    IConfigReference<Boolean> SMART_TERMINAL_ENABLED = varRef(s_loc, "smart.terminal.enabled", Boolean.class,
+            true);
+    @Description("百诚智能终端 tcp server port")
+    IConfigReference<Integer> SMART_TERMINAL_TCP_SERVER_PORT = varRef(s_loc, "smart.terminal.tcp.server.port", Integer.class,
+            1234);
 
 }
