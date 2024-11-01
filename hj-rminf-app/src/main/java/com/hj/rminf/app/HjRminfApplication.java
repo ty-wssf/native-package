@@ -26,7 +26,7 @@ public class HjRminfApplication {
     }
 
     public static void main(String... args) {
-        // 1111
+        // 2222
         globalArgs = args;
         Quarkus.run(args);
     }
