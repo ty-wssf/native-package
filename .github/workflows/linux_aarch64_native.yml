@@ -1,16 +1,14 @@
-name: Build for aarch64
-
+name: Linux (aarch64)
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - main
+    tags:
+      - '*'
   pull_request:
-    branches: [ "master" ]
-
 jobs:
   build:
-    name: Build - ${{ matrix.os }} - ${{ matrix.arch }}
-    runs-on: ${{ matrix.os }}-${{ matrix.arch }} # 指定运行器为aarch64架构
-
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,33 +28,7 @@ jobs:
           AS: aarch64-linux-gnu-as
           LD: aarch64-linux-gnu-ld
           STRIP: aarch64-linux-gnu-strip
-
-      - name: Cache Maven packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-${{ matrix.arch }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-${{ matrix.arch }}-m2
-
-      - name: Set up JDK for GraalVM
-        uses: graalvm/setup-graalvm@v1
-        with:
-          java-version: '21.0.1'
-          distribution: 'graalvm'
-          cache: maven
-
-      - name: Build with Maven
-        run: mvn -B install --file pom.xml
-
-      - name: Build with Maven (app)
-        run: |
-          export MAVEN_OPTS="-Duser.language=UTF-8 -Dfile.encoding=UTF-8"
-          cd hj-rminf-app
-          mvn clean package --P native --file pom.xml --no-transfer-progress
-
-      - name: Upload artifacts app
-        uses: actions/upload-artifact@v3
-        with:
-          name: app-artifacts
-          path: hj-rminf-app/target/
-          if-no-files-found: error
+      - name: Build
+        run: cmake --build build -- -j
+      - name: Test
+        run: ctest --test-dir build --output-on-failure
