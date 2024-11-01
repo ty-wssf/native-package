@@ -8,12 +8,19 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-latest, aarch64]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install aarch64 Toolchain
         run: sudo apt update && sudo apt install g++-aarch64-linux-gnu qemu qemu-user qemu-user-static
+
+      - name: GitHub Action for GraalVM JDK 21
+        uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '21.0.1' # for a specific JDK 21;
+          distribution: 'graalvm' # New 'distribution' option
+          cache: maven
           
       - name: Build with Maven
         run: mvn -B install --file pom.xml
