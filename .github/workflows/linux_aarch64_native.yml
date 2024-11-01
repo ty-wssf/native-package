@@ -8,8 +8,8 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    container: ghcr.io/armmbed/mbed-os-env:master-latest
+    runs-on: ubuntu-latest-arm64
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
