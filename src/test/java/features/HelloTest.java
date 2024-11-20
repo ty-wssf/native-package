@@ -13,7 +13,7 @@ import java.io.IOException;
 public class HelloTest extends HttpTester {
     @Test
     public void hello() throws IOException {
-        assert path("/hello?name=world").get().contains("world");
+        assert path("/hello?name=world1").get().contains("world1");
         assert path("/hello?name=solon").get().contains("solon");
     }
 }
