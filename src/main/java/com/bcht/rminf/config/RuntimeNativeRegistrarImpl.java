@@ -1,5 +1,6 @@
 package com.bcht.rminf.config;
 
+import com.github.xiaoymin.knife4j.solon.settings.OpenApiExtendSetting;
 import com.github.xiaoymin.knife4j.solon.settings.OpenApiSetting;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.aot.RuntimeNativeMetadata;
@@ -13,6 +14,7 @@ public class RuntimeNativeRegistrarImpl implements RuntimeNativeRegistrar {
     @Override
     public void register(AppContext context, RuntimeNativeMetadata metadata) {
         metadata.registerReflection(OpenApiSetting.class, MemberCategory.values());
+        metadata.registerReflection(OpenApiExtendSetting.class, MemberCategory.values());
     }
 
 }
