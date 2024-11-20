@@ -1,0 +1,82 @@
+{
+  "type": "page",
+  "title": "百纳雾灯",
+  "subTitle": "智能雾区诱导系统，区域控制器与上位机通讯协议（VER24.11.03） ",
+  "body": [
+    {
+      "type": "form",
+      "title": "配置表单",
+      "api": "sys/config?category=foglamp",
+      "initApi": "sys/config/category/foglamp",
+      "columnCount": 6,
+      "body": [
+        {
+          "name": "foglamp_enabled",
+          "type": "radios",
+          "label": "是否启用",
+          "value": false,
+          "options": [
+            {
+              "label": "启用",
+              "value": true
+            },
+            {
+              "label": "禁用",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "foglamp_server_port",
+          "type": "input-number",
+          "precision": 0,
+          "min": "81",
+          "label": "服务端口",
+          "value": 1235
+        }
+      ]
+    },
+    {
+      "type": "service",
+      "api": "/foglamp",
+      "interval": 5000,
+      "silentPolling": true,
+      "body": [
+        {
+          "type": "table2",
+          "title": "雾灯设备列表",
+          "source": "$rows",
+          "columns": [
+            {
+              "name": "ip",
+              "label": "设备ip"
+            },
+            {
+              "name": "status",
+              "label": "在线状态",
+              "type": "status"
+            },
+            {
+              "title": "操作",
+              "type": "button-group",
+              "buttons": [
+                {
+                  "type": "button",
+                  "label": "打开",
+                  "actionType": "ajax",
+                  "api": "/foglamp/sendCommand?command=A&subcommand=1&port=1&sbip=${ip}"
+                },
+                {
+                  "type": "button",
+                  "label": "关闭",
+                  "actionType": "ajax",
+                  "api": "/foglamp/sendCommand?command=A&subcommand=2&port=1&sbip=${ip}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

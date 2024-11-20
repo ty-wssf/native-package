@@ -1,51 +1,141 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
-    <parent>
-        <artifactId>nop-entropy</artifactId>
-        <groupId>io.github.entropy-cloud</groupId>
-        <version>2.0.0-SNAPSHOT</version>
-    </parent>
-
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.hj</groupId>
+    <parent>
+        <groupId>org.noear</groupId>
+        <artifactId>solon-parent</artifactId>
+        <version>3.0.3</version>
+        <relativePath/>
+    </parent>
 
+    <groupId>com.bcht</groupId>
     <artifactId>hj-rminf</artifactId>
+    <version>1.0</version>
 
-    <version>1.0.0</version>
+    <packaging>jar</packaging>
 
-    <packaging>pom</packaging>
+    <description>Demo project for Solon</description>
 
-    <modules>
-        <module>hj-rminf-codegen</module>
-        <module>hj-rminf-api</module>
-        <module>hj-rminf-dao</module>
-        <module>hj-rminf-meta</module>
-        <module>hj-rminf-service</module>
-        <module>hj-rminf-web</module>
-        <module>hj-rminf-app</module>
-    </modules>
+    <properties>
+        <java.version>21</java.version>
+
+        <jimmer.version>0.9.12</jimmer.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon-view-freemarker</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon-logging-logback</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.babyfish.jimmer</groupId>
+            <artifactId>jimmer-sql</artifactId>
+            <version>${jimmer.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.15.2</version> <!-- 请根据需要选择合适的版本 -->
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>2.2.220</version> <!-- 使用适合您项目的版本 -->
+            <scope>runtime</scope>
+        </dependency>
+        <!-- HikariCP依赖 -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <!--<version>5.0.1</version>--> <!-- 使用最新的版本 -->
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/commons-net/commons-net -->
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>3.9.0</version> <!-- 你可以根据需要选择适合的版本 -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon-net-httputils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon-openapi2-knife4j</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-web</artifactId>
+            <version>4.5.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon-aot</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.babyfish.jimmer</groupId>
+                            <artifactId>jimmer-apt</artifactId>
+                            <version>${jimmer.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.noear</groupId>
+                <artifactId>solon-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
     <repositories>
-        <!--<repository>
-            <id>central</id>
+        <repository>
+            <id>tencent</id>
             <url>https://mirrors.cloud.tencent.com/nexus/repository/maven-public/</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </repository>-->
-        <repository>
-            <id>nop-repo</id>
-            <url>https://nop.repo.crazydan.io/</url>
         </repository>
     </repositories>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>nop-repo</id>
-            <url>https://nop.repo.crazydan.io/</url>
-        </pluginRepository>
-    </pluginRepositories>
 </project>

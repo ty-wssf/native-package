@@ -1,0 +1,147 @@
+{
+  "type": "page",
+  "title": "移动GPS配置",
+  "subTitle": "监听[http post /hj/gps/yd]数据发送到ftp",
+  "body": [
+    {
+      "type": "form",
+      "title": "配置表单",
+      "api": "sys/config?category=hj_jc_gps",
+      "initApi": "sys/config/category/hj_jc_gps",
+      "columnCount": 2,
+      "body": [
+        {
+          "type": "input-text",
+          "name": "hj_jc_gps_ftp_host",
+          "label": "远程ftp host：",
+          "required": true,
+          "validations": {
+            "matchRegexp": "^(?:\\d{1,3}\\.){3}\\d{1,3}$|^(?!-)[A-Za-z0-9-]+(?<!-)(?:\\.(?!-)[A-Za-z0-9-]+(?<!-))*\\.[A-Za-z]{2,}$"
+          },
+          "validationErrors": {
+            "matchRegexp": "请输入有效的FTP主机地址（域名或IP地址）"
+          },
+          "hint": "输入范例：10.20.11.137"
+        },
+        {
+          "name": "hj_jc_gps_ftp_port",
+          "type": "input-text",
+          "label": "远程ftp端口：",
+          "validations": "isInt",
+          "required": true,
+          "hint": "输入范例：21"
+        },
+        {
+          "name": "hj_jc_gps_ftp_username",
+          "type": "input-text",
+          "label": "远程ftp用户名：",
+          "required": true,
+          "hint": "输入范例：hcs"
+        },
+        {
+          "name": "hj_jc_gps_ftp_password",
+          "type": "input-text",
+          "label": "远程ftp密码：",
+          "required": true,
+          "hint": "输入范例：Abc_hcs_1314"
+        },
+        {
+          "name": "hj_jc_gps_ftp_path",
+          "type": "input-text",
+          "label": "远程ftp路径：",
+          "required": true,
+          "hint": "输入范例：/TRAFFIC_GIS"
+        }
+      ]
+    },
+    {
+      "type": "form",
+      "title": "调试",
+      "api": "/hj/gps/yd/debug",
+      "initApi": "sys/config/category/hj_jc_gps",
+      "columnCount": 3,
+      "body": [
+        {
+          "type": "input-text",
+          "name": "deviceId",
+          "label": "设备唯一标识码",
+          "value": "3613020012058543"
+        },
+        {
+          "type": "input-text",
+          "name": "desc",
+          "label": "终端 cell-id 信息",
+          "value": "460:00:10101:03633",
+          "description": "终端 cell-id 信息，格式为“MCC：MNC：LAC：CellID”即“区码：中国移动\n标识：位置区域：小区编号”，均用 10 进制数表示"
+        },
+        {
+          "type": "radios",
+          "name": "locateStatus",
+          "label": "定位类型",
+          "value": 1,
+          "description": "1 表示 GPS 定位；0、2 均表示 LBS 定位",
+          "options": [
+            {
+              "label": "LBS 定位",
+              "value": 0
+            },
+            {
+              "label": "GPS 定位",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "type": "input-number",
+          "precision": 6,
+          "name": "longitude",
+          "label": "经度",
+          "value": 113.488144
+        },
+        {
+          "type": "input-number",
+          "precision": 6,
+          "name": "latitude",
+          "label": "纬度",
+          "value": 22.570337
+        },
+        {
+          "type": "input-number",
+          "precision": 1,
+          "name": "speed",
+          "label": "速度",
+          "value": 67.5,
+          "description": "速度单位(km/h)"
+        },
+        {
+          "type": "input-number",
+          "precision": 0,
+          "name": "direction",
+          "label": "方向",
+          "value": 230,
+          "description": "方位角，取值范围：0-359.9，单位度，如 270.5"
+        },
+        {
+          "type": "input-text",
+          "name": "gps",
+          "label": "卫星数量",
+          "value": 7,
+          "description": "表示搜索到的可用 GPS 卫星数量"
+        },
+        {
+          "type": "input-text",
+          "name": "at",
+          "label": "时间",
+          "value": "2017-11-14 12:54:27",
+          "validations": {
+            "matchRegexp": "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$"
+          },
+          "validationErrors": {
+            "matchRegexp": "您输入的内容格式不对，请按提示输入！"
+          },
+          "hint": "输入范例：2017-11-14 12:54:27"
+        }
+      ]
+    }
+  ]
+}

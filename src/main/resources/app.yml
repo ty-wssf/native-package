@@ -1,0 +1,53 @@
+server.port: 5999
+
+# 调试模式
+solon.debug: 1
+
+solon.app:
+  name: 'hj-rminf'
+  group: 'hj'
+
+solon.logging.appender:
+  console:
+    level: INFO
+  file:
+    level: INFO
+    name: "logs/${solon.app.name}"
+    rolling: "logs/${solon.app.name}_%d{yyyy-MM-dd}/%i.log"
+    maxFileSize: "10 MB"
+    maxHistory: "7"
+
+solon.logging.logger:
+  "root": #默认记录器配置
+    level: INFO
+
+solon.dataSources:
+  "jimmer!": #数据源（!结尾表示 typed=true）
+    class: "com.zaxxer.hikari.HikariDataSource"
+    driverClassName: "org.h2.Driver"
+    # 内存配置 jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    jdbcUrl: "jdbc:h2:file:./data/jimmer"
+    username: "sa"
+    paasword: ""
+
+# 关于 “knife4j” 的配置
+knife4j.enable: true
+knife4j.basic.enable: true
+knife4j.basic.username: admin
+knife4j.basic.password: 123456
+knife4j.setting.enableOpenApi: false
+knife4j.setting.enableSwaggerModels: false
+knife4j.setting.enableFooter: false
+
+# 警车GPS数据上传FTP配置
+#hj:
+#  jc:
+#    gps:
+#      ftp:
+#        host: 10.20.11.137
+#        port: 21
+#        path: /TRAFFIC_GIS
+#        username: hcs
+#        password: Abc_hcs_1314
+
+solon.config.add: "./app.yml"

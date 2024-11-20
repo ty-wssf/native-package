@@ -1,0 +1,33 @@
+{
+  "status": 0,
+  "msg": "",
+  "data": {
+    "pages": [
+      {
+        "label": "",
+        "url": "/",
+        "redirect": "gps/yd"
+      },
+      {
+        "label": "",
+        "children": [
+          {
+            "label": "移动GPS（车俩）",
+            "url": "gps/yd",
+            "schemaApi": "get:/pages/yd-gps.json"
+          },
+          {
+            "label": "百诚智能终端",
+            "url": "smart/terminal",
+            "schemaApi": "get:/pages/smart-terminal.json"
+          },
+          {
+            "label": "百纳雾灯",
+            "url": "foglamp",
+            "schemaApi": "get:/pages/foglamp.json"
+          }
+        ]
+      }
+    ]
+  }
+}
