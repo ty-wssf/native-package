@@ -1,0 +1,213 @@
+{
+  "type": "page",
+  "title": "大华kafka接入",
+  "subTitle": "大华kafka接入 ",
+  "body": [
+    {
+      "type": "form",
+      "title": "配置表单",
+      "api": "sys/config?category=dhkafka",
+      "initApi": "sys/config/category/dhkafka",
+      "body": [
+        {
+          "type": "fieldSet",
+          "title": "订阅kafka配置",
+          "body": [
+            {
+              "type": "group",
+              "body": [
+                {
+                  "name": "solon_cloud_dhkafka_event_enabled",
+                  "type": "radios",
+                  "label": "是否启用",
+                  "value": false,
+                  "columnRatio": 2,
+                  "options": [
+                    {
+                      "label": "启用",
+                      "value": true
+                    },
+                    {
+                      "label": "禁用",
+                      "value": false
+                    }
+                  ]
+                },
+                {
+                  "name": "solon_cloud_dhkafka_event_server",
+                  "type": "input-text",
+                  "label": "服务地址",
+                  "required": true,
+                  "columnRatio": 3,
+                  "description": "例如：10.20.10.171:9092"
+                },
+                {
+                  "name": "solon_cloud_dhkafka_event_topic",
+                  "type": "input-text",
+                  "label": "订阅主题",
+                  "required": true,
+                  "columnRatio": 3,
+                  "description": "例如：hello.demo2"
+                },
+                {
+                  "name": "solon_cloud_dhkafka_event_image_url_gateway",
+                  "type": "input-text",
+                  "label": "图片地址网关",
+                  "required": true,
+                  "columnRatio": 3,
+                  "description": "例如：http://54.13.1.41:38498"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "fieldSet",
+          "title": "数据库配置",
+          "body": [
+            {
+              "type": "group",
+              "body": [
+                {
+                  "name": "DHkafka_db_enable",
+                  "type": "radios",
+                  "label": "是否启用",
+                  "value": false,
+                  "columnRatio": 12,
+                  "options": [
+                    {
+                      "label": "启用",
+                      "value": true
+                    },
+                    {
+                      "label": "禁用",
+                      "value": false
+                    }
+                  ]
+                },
+                {
+                  "name": "DHkafka_db_driverClassName",
+                  "required": true,
+                  "type": "input-text",
+                  "label": "数据库驱动",
+                  "columnRatio": 2,
+                  "description": "例如：com.mysql.cj.jdbc.Driver"
+                },
+                {
+                  "name": "DHkafka_db_jdbcUrl",
+                  "required": true,
+                  "type": "input-text",
+                  "label": "数据库url",
+                  "columnRatio": 10,
+                  "description": "例如：jdbc:mysql://10.20.10.152:30007/its?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2b8&useSSL=false"
+                },
+                {
+                  "name": "DHkafka_db_username",
+                  "required": true,
+                  "type": "input-text",
+                  "label": "用户名",
+                  "columnRatio": 2,
+                  "description": "例如：root"
+                },
+                {
+                  "name": "DHkafka_db_password",
+                  "required": true,
+                  "type": "input-text",
+                  "label": "密码",
+                  "columnRatio": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "fieldSet",
+          "title": "推送rabbitmq配置",
+          "body": [
+            {
+              "type": "group",
+              "body": [
+                {
+                  "name": "solon_cloud_dhkafkatarget_enable",
+                  "type": "radios",
+                  "label": "是否启用",
+                  "value": false,
+                  "columnRatio": 12,
+                  "options": [
+                    {
+                      "label": "启用",
+                      "value": true
+                    },
+                    {
+                      "label": "禁用",
+                      "value": false
+                    }
+                  ]
+                },
+                {
+                  "name": "solon_cloud_dhkafkatarget_server",
+                  "type": "input-text",
+                  "label": "目标rabbitmq地址",
+                  "required": true,
+                  "columnRatio": 2,
+                  "description": "例如：10.20.10.5:5672"
+                },
+                {
+                  "name": "solon_cloud_dhkafkatarget_username",
+                  "type": "input-text",
+                  "label": "用户名",
+                  "required": true,
+                  "columnRatio": 2,
+                  "description": "例如：ahbcht"
+                },
+                {
+                  "name": "solon_cloud_dhkafkatarget_password",
+                  "type": "input-text",
+                  "label": "密码",
+                  "required": true,
+                  "columnRatio": 2,
+                  "description": "例如：Bcht123"
+                }
+              ]
+            },
+            {
+              "type": "group",
+              "body": [
+                {
+                  "name": "solon_cloud_dhkafkatarget_event_exchange",
+                  "type": "input-text",
+                  "label": "交换机",
+                  "required": true,
+                  "columnRatio": 2,
+                  "description": "例如：BCHT_ITS_DATA"
+                },
+                {
+                  "name": "solon_cloud_dhkafkatarget_event_routingkey",
+                  "type": "input-text",
+                  "label": "过车路由",
+                  "required": true,
+                  "columnRatio": 4,
+                  "description": "例如：BCHT.TFCPASS.HESSIAN.PASS"
+                },
+                {
+                  "name": "solon_cloud_dhkafkatarget_event_routingkey_vio",
+                  "type": "input-text",
+                  "label": "违法路由",
+                  "required": true,
+                  "columnRatio": 4,
+                  "description": "例如：BCHT.TFCPASS.HESSIAN.VIO"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

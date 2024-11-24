@@ -1,0 +1,107 @@
+{
+	"type": "page",
+	"body": [{
+		"label": "新增",
+		"type": "button",
+		"actionType": "dialog",
+		"level": "primary",
+		"className": "m-b-sm",
+		"dialog": {
+			"title": "新增",
+			"body": {
+				"type": "form",
+				"api": "post:/sys/relation",
+				"body": [{
+						"type": "input-text",
+						"name": "objectId",
+						"label": "对象ID",
+						"required": true
+					},
+					{
+						"type": "input-text",
+						"name": "targetId",
+						"label": "目标ID",
+						"required": true
+					},
+					{
+						"label": "所属分类",
+						"type": "select",
+						"name": "category",
+						"required": true,
+						"options": [{
+							"label": "大华百诚卡口设备编号",
+							"value": "dh_bc_sbbh"
+						}]
+					}
+				]
+			}
+		}
+	}, {
+		"label": "批量导入",
+		"type": "button",
+		"actionType": "dialog",
+		"level": "primary",
+		"className": "m-b-sm",
+		"dialog": {
+			"title": "批量导入",
+			"body": {
+				"type": "form",
+				"api": "post:/sys/relation",
+				"body": [{
+					"type": "input-excel",
+					"name": "excel",
+					"label": "上传 Excel"
+				}]
+			}
+		}
+	}, {
+		"type": "crud",
+		"autoGenerateFilter": {
+			"columnsNum": 4,
+			"showBtnToolbar": false
+		},
+		"api": "sys/relation",
+		"syncLocation": false,
+		"columns": [{
+				"name": "id",
+				"label": "ID"
+			},
+			{
+				"name": "objectId",
+				"label": "对象ID",
+				"searchable": {
+					"type": "input-text",
+					"name": "objectId",
+					"label": "对象ID",
+					"placeholder": "输入对象ID"
+				}
+			},
+			{
+				"name": "targetId",
+				"label": "目标ID"
+			},
+			{
+				"name": "category",
+				"label": "所属分类",
+				"searchable": {
+					"type": "input-text",
+					"name": "category",
+					"label": "所属分类",
+					"placeholder": "输入所属分类"
+				}
+			},
+			{
+				"type": "operation",
+				"label": "操作",
+				"buttons": [{
+					"label": "删除",
+					"type": "button",
+					"actionType": "ajax",
+					"level": "danger",
+					"confirmText": "确认要删除？",
+					"api": "delete:/sys/relation/${id}"
+				}]
+			}
+		]
+	}]
+}

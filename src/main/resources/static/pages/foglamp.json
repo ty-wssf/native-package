@@ -71,6 +71,42 @@
                   "label": "关闭",
                   "actionType": "ajax",
                   "api": "/foglamp/sendCommand?command=A&subcommand=2&port=1&sbip=${ip}"
+                },
+                {
+                  "type": "button",
+                  "label": "雨",
+                  "actionType": "ajax",
+                  "api": "/foglamp/sendCommand?command=M&subcommand=1&port=1&sbip=${ip}"
+                },
+                {
+                  "type": "button",
+                  "label": "雪",
+                  "actionType": "ajax",
+                  "api": "/foglamp/sendCommand?command=M&subcommand=2&port=1&sbip=${ip}"
+                },
+                {
+                  "type": "button",
+                  "label": "雾",
+                  "actionType": "ajax",
+                  "api": "/foglamp/sendCommand?command=M&subcommand=3&port=1&sbip=${ip}"
+                },
+                {
+                  "type": "button",
+                  "label": "冰",
+                  "actionType": "ajax",
+                  "api": "/foglamp/sendCommand?command=M&subcommand=4&port=1&sbip=${ip}"
+                },
+                {
+                  "type": "button",
+                  "label": "风",
+                  "actionType": "ajax",
+                  "api": "/foglamp/sendCommand?command=M&subcommand=5&port=1&sbip=${ip}"
+                },
+                {
+                  "type": "button",
+                  "label": "无",
+                  "actionType": "ajax",
+                  "api": "/foglamp/sendCommand?command=M&subcommand=6&port=1&sbip=${ip}"
                 }
               ]
             }

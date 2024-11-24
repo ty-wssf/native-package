@@ -18,26 +18,11 @@ public class DemoController {
         return String.format("Hello %s!", name);
     }
 
-    @Mapping("/hello2")
-    public ModelAndView hello2(@Param(defaultValue = "world") String name) {
-        return new ModelAndView("hello2.ftl").put("name", name);
-    }
-
-    @Mapping("/hello3")
-    public ModelAndView hello3(@Param(defaultValue = "world") String name) {
-        return new ModelAndView("amis-hello.ftl").put("name", name);
-    }
-
     // {"status":0,"msg":"保存成功","data":{"id":1}}
     @Post
     @Mapping("/saveForm")
     public String saveForm() {
         return "{\"status\":0,\"msg\":\"保存成功\",\"data\":{\"id\":1}}";
-    }
-
-    @Mapping("/amis-app")
-    public ModelAndView amisApp(@Param(defaultValue = "world") String name) {
-        return new ModelAndView("amis-app.ftl").put("name", name);
     }
 
 }

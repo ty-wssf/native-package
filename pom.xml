@@ -20,7 +20,7 @@
     <description>Demo project for Solon</description>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>1.8</java.version>
 
         <jimmer.version>0.9.12</jimmer.version>
     </properties>
@@ -33,12 +33,12 @@
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon-view-freemarker</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.noear</groupId>
             <artifactId>solon-logging-logback</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-kafka-client</artifactId>
+            <version>4.5.4</version> <!-- 请根据实际情况使用合适的版本 -->
         </dependency>
 
         <dependency>
@@ -69,6 +69,27 @@
             <version>2.2.220</version> <!-- 使用适合您项目的版本 -->
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>2.2.220</version> <!-- 使用适合您项目的版本 -->
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.4</version> <!-- 请检查最新版本 -->
+        </dependency>
         <!-- HikariCP依赖 -->
         <dependency>
             <groupId>com.zaxxer</groupId>
@@ -97,6 +118,11 @@
             <artifactId>vertx-web</artifactId>
             <version>4.5.4</version>
         </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-rabbitmq-client</artifactId>
+            <version>4.5.4</version>
+        </dependency>
 
         <dependency>
             <groupId>org.noear</groupId>
@@ -113,6 +139,11 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
                         <path>
                             <groupId>org.babyfish.jimmer</groupId>
                             <artifactId>jimmer-apt</artifactId>

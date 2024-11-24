@@ -5,11 +5,11 @@ import java.util.List;
 public class PageList<T> {
 
     private List<T> rows;
-    private int count;
+    private long total;
 
-    public PageList(List<T> rows, int count) {
+    public PageList(List<T> rows, long total) {
         this.rows = rows;
-        this.count = count;
+        this.total = total;
     }
 
 }

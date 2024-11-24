@@ -14,6 +14,7 @@ import org.noear.solon.annotation.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +61,53 @@ public class FoglampServer extends AbstractVerticle {
                             buffer.appendBytes(controlAddressRepo.get(commandEntity.getSbip()));
                             buffer.appendByte((byte) 0x03); // 下发控制命令参数
                             buffer.appendBytes(hexStringToByteArray("04")); // 内容部分
+                            buffer.appendBytes(TAIL); // 下发控制命令参数
+                        }
+                        log.info("发送指令到设备：{} -> {}", commandEntity.getSbip(), bytesToHex(buffer.getBytes()));
+                        socketRepo.get(commandEntity.getSbip()).write(buffer);
+                        break;
+                    case "M":
+                        // 天气现象-Subcommand 雾灯汉字模块显示：雨-1、雪-2、雾-3、冰-4、风-5、无【显示关闭】-6
+                        if ("1".equals(commandEntity.getSubcommand())) {
+                            buffer.appendBytes(HEAD);
+                            buffer.appendBytes(controlAddressRepo.get(commandEntity.getSbip()));
+                            buffer.appendByte((byte) 0x31); // 设置手动、GPS自动、气象自动模式下诱导灯文字
+                            buffer.appendBytes(hexStringToByteArray("00")); // 内容部分
+                            buffer.appendBytes(convertToCustomBytes("雨"));
+                            buffer.appendBytes(TAIL); // 下发控制命令参数
+                        } else if ("2".equals(commandEntity.getSubcommand())) {
+                            buffer.appendBytes(HEAD);
+                            buffer.appendBytes(controlAddressRepo.get(commandEntity.getSbip()));
+                            buffer.appendByte((byte) 0x31); // 设置手动、GPS自动、气象自动模式下诱导灯文字
+                            buffer.appendBytes(hexStringToByteArray("00")); // 内容部分
+                            buffer.appendBytes(convertToCustomBytes("雪"));
+                            buffer.appendBytes(TAIL); // 下发控制命令参数
+                        } else if ("3".equals(commandEntity.getSubcommand())) {
+                            buffer.appendBytes(HEAD);
+                            buffer.appendBytes(controlAddressRepo.get(commandEntity.getSbip()));
+                            buffer.appendByte((byte) 0x31); // 设置手动、GPS自动、气象自动模式下诱导灯文字
+                            buffer.appendBytes(hexStringToByteArray("00")); // 内容部分
+                            buffer.appendBytes(convertToCustomBytes("雾"));
+                            buffer.appendBytes(TAIL); // 下发控制命令参数
+                        } else if ("4".equals(commandEntity.getSubcommand())) {
+                            buffer.appendBytes(HEAD);
+                            buffer.appendBytes(controlAddressRepo.get(commandEntity.getSbip()));
+                            buffer.appendByte((byte) 0x31); // 设置手动、GPS自动、气象自动模式下诱导灯文字
+                            buffer.appendBytes(hexStringToByteArray("00")); // 内容部分
+                            buffer.appendBytes(convertToCustomBytes("冰"));
+                            buffer.appendBytes(TAIL); // 下发控制命令参数
+                        } else if ("5".equals(commandEntity.getSubcommand())) {
+                            buffer.appendBytes(HEAD);
+                            buffer.appendBytes(controlAddressRepo.get(commandEntity.getSbip()));
+                            buffer.appendByte((byte) 0x31); // 设置手动、GPS自动、气象自动模式下诱导灯文字
+                            buffer.appendBytes(hexStringToByteArray("00")); // 内容部分
+                            buffer.appendBytes(convertToCustomBytes("风"));
+                            buffer.appendBytes(TAIL); // 下发控制命令参数
+                        } else {
+                            buffer.appendBytes(HEAD);
+                            buffer.appendBytes(controlAddressRepo.get(commandEntity.getSbip()));
+                            buffer.appendByte((byte) 0x31); // 设置手动、GPS自动、气象自动模式下诱导灯文字
+                            buffer.appendBytes(hexStringToByteArray("00")); // 内容部分
                             buffer.appendBytes(TAIL); // 下发控制命令参数
                         }
                         log.info("发送指令到设备：{} -> {}", commandEntity.getSbip(), bytesToHex(buffer.getBytes()));
@@ -231,5 +279,35 @@ public class FoglampServer extends AbstractVerticle {
         }
         return data;
     }
+
+    public static void main(String[] args) throws UnsupportedEncodingException {
+        String chineseText = "慢行";
+        byte[] customBytes = convertToCustomBytes(chineseText);
+        System.out.print("转换后的字节：");
+        for (byte b : customBytes) {
+            System.out.printf("%02X ", b);
+        }
+
+    }
+
+    public static byte[] convertToCustomBytes(String text) {
+        try {
+            byte[] gbBytes = text.getBytes(GB2312_CHARSET);
+            byte[] customBytes = new byte[gbBytes.length];
+
+            for (int i = 0; i < gbBytes.length; i += 2) {
+                // 高字节和低字节分别减去0xA0
+                customBytes[i] = (byte) (gbBytes[i] - 0xA0);
+                customBytes[i + 1] = (byte) (gbBytes[i + 1] - 0xA0);
+            }
+
+            return customBytes;
+        } catch (Exception e) {
+            return new byte[0];
+        }
+    }
+
+    // 定义GB2312编码的字符集
+    private static final String GB2312_CHARSET = "GB2312";
 
 }

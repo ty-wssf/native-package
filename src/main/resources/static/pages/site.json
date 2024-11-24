@@ -25,6 +25,21 @@
             "label": "百纳雾灯",
             "url": "foglamp",
             "schemaApi": "get:/pages/foglamp.json"
+          },
+          {
+            "label": "大华kafka接入",
+            "url": "dhkafka",
+            "schemaApi": "get:/pages/dhkafka.json"
+          },
+          {
+            "label": "海康postgresql接入",
+            "url": "hkpostgresql",
+            "schemaApi": "get:/pages/hkpostgresql.json"
+          },
+          {
+            "label": "对应关系配置",
+            "url": "sys/relation",
+            "schemaApi": "get:/pages/sys-relation.json"
           }
         ]
       }

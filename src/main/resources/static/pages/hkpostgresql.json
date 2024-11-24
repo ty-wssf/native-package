@@ -1,0 +1,183 @@
+{
+  "type": "page",
+  "title": "海康postgresql接入",
+  "subTitle": "海康postgresql接入，接入海康气象和警情数据",
+  "body": [
+    {
+      "type": "form",
+      "title": "配置表单",
+      "api": "sys/config?category=dhkafka",
+      "initApi": "sys/config/category/dhkafka",
+      "body": [
+        {
+          "type": "fieldSet",
+          "title": "数据库配置",
+          "body": [
+            {
+              "type": "group",
+              "body": [
+                {
+                  "name": "hkpostgresql_db_enable",
+                  "type": "radios",
+                  "label": "是否启用",
+                  "value": false,
+                  "columnRatio": 2,
+                  "options": [
+                    {
+                      "label": "启用",
+                      "value": true
+                    },
+                    {
+                      "label": "禁用",
+                      "value": false
+                    }
+                  ]
+                },
+                {
+                  "name": "hkpostgresql_db_interval",
+                  "type": "input-number",
+                  "precision": 0,
+                  "min": "5",
+                  "label": "同步间隔（单位：s）",
+                  "value": 5,
+                  "columnRatio": 2
+                }
+              ]
+            },
+            {
+              "type": "group",
+              "body": [
+                {
+                  "name": "hkpostgresql_db_driverClassName",
+                  "required": true,
+                  "type": "input-text",
+                  "label": "数据库驱动",
+                  "columnRatio": 2,
+                  "description": "例如：org.postgresql.Driver"
+                },
+                {
+                  "name": "hkpostgresql_db_jdbcUrl",
+                  "required": true,
+                  "type": "input-text",
+                  "label": "数据库url",
+                  "columnRatio": 10,
+                  "description": "例如：jdbc:postgresql://10.20.10.152:30543/test"
+                },
+                {
+                  "name": "hkpostgresql_db_username",
+                  "required": true,
+                  "type": "input-text",
+                  "label": "用户名",
+                  "columnRatio": 2,
+                  "description": "例如：postgres"
+                },
+                {
+                  "name": "hkpostgresql_db_password",
+                  "required": true,
+                  "type": "input-text",
+                  "label": "密码",
+                  "columnRatio": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "divider"
+        },
+        {
+           "type": "fieldSet",
+           "title": "目标rabbitmq配置",
+           "body": [
+             {
+               "type": "group",
+               "body": [
+                 {
+                   "name": "hkpostgresql_rabbitmq_enable",
+                   "type": "radios",
+                   "label": "是否启用",
+                   "value": false,
+                   "columnRatio": 12,
+                   "options": [
+                     {
+                       "label": "启用",
+                       "value": true
+                     },
+                     {
+                       "label": "禁用",
+                       "value": false
+                     }
+                   ]
+                 },
+                 {
+                   "name": "hkpostgresql_rabbitmq_host",
+                   "type": "input-text",
+                   "label": "目标rabbitmq host",
+                   "required": true,
+                   "columnRatio": 2,
+                   "description": "例如：10.20.10.5"
+                 },
+                 {
+                   "name": "hkpostgresql_rabbitmq_port",
+                   "type": "input-number",
+                   "precision": 0,
+                   "min": "81",
+                   "label": "目标rabbitmq端口",
+                   "required": true,
+                   "columnRatio": 2,
+                   "description": "例如：5672"
+                 },
+                 {
+                   "name": "hkpostgresql_rabbitmq_username",
+                   "type": "input-text",
+                   "label": "用户名",
+                   "required": true,
+                   "columnRatio": 2,
+                   "description": "例如：ahbcht"
+                 },
+                 {
+                   "name": "hkpostgresql_rabbitmq_password",
+                   "type": "input-text",
+                   "label": "密码",
+                   "required": true,
+                   "columnRatio": 2,
+                   "description": "例如：Bcht123"
+                 }
+               ]
+             },
+             {
+                "type": "group",
+                "body": [
+                  {
+                    "name": "hkpostgresql_rabbitmq_exchange",
+                    "type": "input-text",
+                    "label": "交换机",
+                    "required": true,
+                    "columnRatio": 2,
+                    "value": "BCHT_ITS_DATA",
+                    "description": "例如：BCHT_ITS_DATA"
+                  },
+                  {
+                    "name": "hkpostgresql_rabbitmq_routingkey_weather",
+                    "type": "input-text",
+                    "label": "气象routingkey",
+                    "required": true,
+                    "columnRatio": 2,
+                    "description": "例如：BCHT.WEATHER"
+                  },
+                  {
+                    "name": "hkpostgresql_rabbitmq_routingkey_warning",
+                    "type": "input-text",
+                    "label": "警情routingkey",
+                    "required": true,
+                    "columnRatio": 2,
+                    "description": "例如：BCHT.WARNING"
+                  }
+                ]
+              }
+           ]
+        }
+      ]
+    }
+  ]
+}
