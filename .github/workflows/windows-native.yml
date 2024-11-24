@@ -46,12 +46,8 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: hj-rminf-app-artifacts
-          path: target/hj-rminf.exe
+          path: target/
           if-no-files-found: error # 如果未找到文件，则报错
-
-
-      - name: Execute hj-rminf.exe
-        run: ./target/hj-rminf.exe
 
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
