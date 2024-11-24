@@ -46,7 +46,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: hj-rminf-app-artifacts
-          path: target/hj-rminf.exe
+          path: target/
           if-no-files-found: error # 如果未找到文件，则报错
 
 
