@@ -40,13 +40,13 @@ jobs:
       - name: Build with Maven
         run: |
           set MAVEN_OPTS="-Duser.language=UTF-8 -Dfile.encoding=UTF-8"
-          mvn clean native:compile -P native -DskipTests
+          mvn clean package --P native -file pom.xml --no-transfer-progress
 
       - name: Upload artifacts app
         uses: actions/upload-artifact@v3
         with:
           name: hj-rminf-app-artifacts
-          path: target/
+          path: target/hj-rminf.exe
           if-no-files-found: error # 如果未找到文件，则报错
 
 
