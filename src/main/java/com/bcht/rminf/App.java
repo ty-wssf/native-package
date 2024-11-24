@@ -15,7 +15,7 @@ import java.util.List;
 public class App {
     public static void main(String[] args) {
         Solon.start(App.class, args, app -> {
-            // 重定向首页1
+            // 重定向首页2
             app.get("/", ctx -> ctx.redirect("index.html"));
             app.onEvent(AppInitEndEvent.class, e -> {
                 Solon.context().subBeansOfType(JSqlClient.class, jSqlClient -> {
