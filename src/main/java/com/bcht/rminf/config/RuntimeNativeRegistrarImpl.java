@@ -1,6 +1,14 @@
 package com.bcht.rminf.config;
 
+import com.bcht.rminf.modules.demo.model.Author;
+import com.bcht.rminf.modules.demo.model.Book;
+import com.bcht.rminf.modules.demo.model.BookStore;
+import com.bcht.rminf.modules.demo.model.TreeNode;
 import com.bcht.rminf.modules.demo.model.common.BaseEntity;
+import com.bcht.rminf.modules.hkpostgresql.model.WarningInstanceInfo;
+import com.bcht.rminf.modules.hkpostgresql.model.WeatherInfo;
+import com.bcht.rminf.modules.sys.model.SysConfig;
+import com.bcht.rminf.modules.sys.model.SysRelation;
 import com.github.xiaoymin.knife4j.solon.settings.OpenApiExtendSetting;
 import com.github.xiaoymin.knife4j.solon.settings.OpenApiSetting;
 import org.noear.solon.annotation.Component;
@@ -17,6 +25,14 @@ public class RuntimeNativeRegistrarImpl implements RuntimeNativeRegistrar {
         metadata.registerReflection(OpenApiSetting.class, MemberCategory.values());
         metadata.registerReflection(OpenApiExtendSetting.class, MemberCategory.values());
         metadata.registerReflection(BaseEntity.class, MemberCategory.values());
+        metadata.registerReflection(Author.class, MemberCategory.values());
+        metadata.registerReflection(Book.class, MemberCategory.values());
+        metadata.registerReflection(BookStore.class, MemberCategory.values());
+        metadata.registerReflection(TreeNode.class, MemberCategory.values());
+        metadata.registerReflection(WeatherInfo.class, MemberCategory.values());
+        metadata.registerReflection(WarningInstanceInfo.class, MemberCategory.values());
+        metadata.registerReflection(SysConfig.class, MemberCategory.values());
+        metadata.registerReflection(SysRelation.class, MemberCategory.values());
     }
 
 }
