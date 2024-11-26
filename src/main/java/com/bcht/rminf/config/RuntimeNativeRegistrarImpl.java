@@ -27,6 +27,11 @@ public class RuntimeNativeRegistrarImpl implements RuntimeNativeRegistrar {
                     Class<?> clz = ClassUtil.loadClass(context.getClassLoader(), className);
                     metadata.registerReflection(clz, MemberCategory.values());
                 });
+
+        // 注册静态资源
+        metadata.registerResourceInclude("h2-database.sql");
+        metadata.registerResourceInclude("app.yml");
+        metadata.registerResourceExclude("static/.*");
     }
 
 }
