@@ -31,8 +31,7 @@ public class RuntimeNativeRegistrarImpl implements RuntimeNativeRegistrar {
         // 注册静态资源
         metadata.registerResourceInclude("h2-database.sql");
         metadata.registerResourceInclude("app.yml");
-        metadata.registerResourceExclude("static/index.html");
-        metadata.registerResourceExclude("static/*.*");
+        metadata.registerResourceInclude("static/index.html");
     }
 
 }
