@@ -7,6 +7,8 @@ import org.babyfish.jimmer.sql.JSqlClient;
 import org.noear.solon.Solon;
 import org.noear.solon.annotation.SolonMain;
 import org.noear.solon.core.event.AppInitEndEvent;
+import org.noear.solon.web.staticfiles.StaticMappings;
+import org.noear.solon.web.staticfiles.repository.ClassPathStaticRepository;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -15,8 +17,9 @@ import java.util.List;
 public class App {
     public static void main(String[] args) {
         Solon.start(App.class, args, app -> {
-            // 重定向首页3
+            // 重定向首页
             app.get("/", ctx -> ctx.redirect("index.html"));
+            StaticMappings.add("/", new ClassPathStaticRepository("static/"));
             app.onEvent(AppInitEndEvent.class, e -> {
                 Solon.context().subBeansOfType(JSqlClient.class, jSqlClient -> {
                     try {
