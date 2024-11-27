@@ -32,6 +32,12 @@ public class RuntimeNativeRegistrarImpl implements RuntimeNativeRegistrar {
         metadata.registerResourceInclude("h2-database.sql");
         metadata.registerResourceInclude("app.yml");
         metadata.registerResourceInclude("static/index.html");
+
+        metadata.registerArg("-J--add-opens=java.base/java.lang.invoke=ALL-UNNAMED");
+        metadata.registerArg("-J--add-opens=java.base/java.nio=ALL-UNNAMED");
+        metadata.registerArg("-J--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED");
+
+        metadata.registerArg("-march=compatibility");
     }
 
 }
