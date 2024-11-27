@@ -2,12 +2,18 @@ package com.bcht.rminf.modules.terminal.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
+@Data
 @ApiModel
 public class Device {
 
     @ApiModelProperty("ip")
     private String ip;
+    @ApiModelProperty("status 1：在线 0：离线")
+    private String status;
+    @ApiModelProperty("statusName")
+    private String statusName;
     @ApiModelProperty("制造厂商")
     private String manufacturer;
     @ApiModelProperty("设备名称")
@@ -30,45 +36,13 @@ public class Device {
     private String serialNumber;
     @ApiModelProperty("设备名称")
     private String deviceName;
+    @ApiModelProperty("经度")
+    private String longitude;
+    @ApiModelProperty("经度")
+    private String longitude;
 
     public Device(String ip) {
         this.ip = ip;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    public int getBatchNumber() {
-        return batchNumber;
-    }
-
-    public void setBatchNumber(int batchNumber) {
-        this.batchNumber = batchNumber;
-    }
-
-    public String getManufacturer() {
-        return manufacturer;
-    }
-
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getProductId() {
-        return productId;
     }
 
     public void setProductId(int productId) {
@@ -76,62 +50,14 @@ public class Device {
         this.productIdName = ProductID.findByCode((byte) productId);
     }
 
-    public int getProductModel() {
-        return productModel;
-    }
-
     public void setProductModel(int productModel) {
         this.productModel = productModel;
         this.productModelName = ProductModel.findByCode((byte) productModel);
     }
 
-    public String getProductionDate() {
-        return productionDate;
+    public void setStatus(String status) {
+        this.status = status;
+        this.statusName = "0".equals(status) ? "离线" : "在线";
     }
 
-    public void setProductionDate(String productionDate) {
-        this.productionDate = productionDate;
-    }
-
-    public String getSoftwareVersion() {
-        return softwareVersion;
-    }
-
-    public void setSoftwareVersion(String softwareVersion) {
-        this.softwareVersion = softwareVersion;
-    }
-
-    public String getSerialNumber() {
-        return serialNumber;
-    }
-
-    public void setSerialNumber(String serialNumber) {
-        this.serialNumber = serialNumber;
-    }
-
-    public String getDeviceName() {
-        return deviceName;
-    }
-
-    public void setDeviceName(String deviceName) {
-        this.deviceName = deviceName;
-    }
-
-    @Override
-    public String toString() {
-        return "Device{" +
-                "ip='" + ip + '\'' +
-                ", manufacturer='" + manufacturer + '\'' +
-                ", name='" + name + '\'' +
-                ", productId=" + productId +
-                ", productIdName='" + productIdName + '\'' +
-                ", productModel=" + productModel +
-                ", productModelName='" + productModelName + '\'' +
-                ", batchNumber=" + batchNumber +
-                ", productionDate='" + productionDate + '\'' +
-                ", softwareVersion='" + softwareVersion + '\'' +
-                ", serialNumber='" + serialNumber + '\'' +
-                ", deviceName='" + deviceName + '\'' +
-                '}';
-    }
 }

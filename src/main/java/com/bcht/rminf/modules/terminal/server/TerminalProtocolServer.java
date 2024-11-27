@@ -85,7 +85,9 @@ public class TerminalProtocolServer extends AbstractVerticle {
         server.connectHandler(socket -> {
             String host = socket.remoteAddress().host();
             socketRepo.put(host, socket);
-            deviceRepo.put(host, new Device(host));
+            Device device = new Device(host);
+            device.setStatus("1");
+            deviceRepo.put(host, device);
             log.info("Smart terminal device connected: {}. Current connection count: {}", host, socketRepo.size());
 
             // 构造parser
@@ -153,7 +155,9 @@ public class TerminalProtocolServer extends AbstractVerticle {
             // 关闭连接
             socket.endHandler(v -> {
                 socketRepo.remove(host);
-                deviceRepo.remove(host);
+                if (deviceRepo.containsKey(host)){
+                    deviceRepo.get(host).setStatus("0");
+                }
                 log.info("Smart terminal device disconnected: {}. Remaining connection count: {}", host, socketRepo.size());
             });
         });

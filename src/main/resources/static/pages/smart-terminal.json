@@ -80,6 +80,26 @@
                           {
                             "label": "设备IP",
                             "content": "${ip}"
+                          },
+                          {
+                            "label": "设备状态",
+                            "content": {
+                                "type": "tag",
+                                "label": "${statusName}",
+                                "color": "${status == '1' ? 'success' : 'inactive'}"
+                            }
+                          },
+                          {
+                            "label": "出场日期",
+                            "content": "${productionDate}"
+                          },
+                          {
+                            "label": "软件版本",
+                            "content": "${softwareVersion}"
+                          },
+                          {
+                            "label": "序列号",
+                            "content": "${serialNumber}"
                           }
                         ]
                       },

@@ -16,6 +16,7 @@ public interface BaseEntity {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     LocalDateTime modifiedTime();
+
 }
 
 /*----------------Documentation Links----------------

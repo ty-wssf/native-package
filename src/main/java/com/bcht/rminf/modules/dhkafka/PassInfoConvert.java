@@ -3,6 +3,7 @@ package com.bcht.rminf.modules.dhkafka;
 import lombok.extern.slf4j.Slf4j;
 import org.noear.snack.ONode;
 import org.noear.solon.Solon;
+import org.noear.solon.Utils;
 import org.noear.solon.core.convert.Converter;
 import org.noear.solon.core.exception.ConvertException;
 
@@ -19,7 +20,8 @@ public class PassInfoConvert implements Converter<String, TrafficVechilePassInfo
             passInfo.setGcbh(oNode.get("recordId").getString());
             // 设备序号转变
             passInfo.setSbxh(oNode.get("channelId").getString());
-            passInfo.setHphm(oNode.get("plateNum").getString());
+            String hphm = oNode.get("plateNum").getString();
+            passInfo.setHphm("00000000".equals(hphm) ? "-" : hphm);
             passInfo.setHpzl(oNode.get("plateType").getString());
             passInfo.setHpys(oNode.get("plateColor").getString());
             passInfo.setCwkc(oNode.get("carLength").getFloat());
@@ -40,6 +42,15 @@ public class PassInfoConvert implements Converter<String, TrafficVechilePassInfo
                 }
                 if ("0".equals(v.get("imgType").getString()) && v.get("imgIdx").getInt() == 3) {
                     passInfo.setTpurl2(Solon.cfg().get("solon.cloud.dhkafka.event.image.url.gateway") + v.get("imgUrl").getString());
+                }
+                if ("1".equals(v.get("imgType").getString()) && v.get("imgIdx").getInt() == 1) { // imgType类型1是合成图
+                    if (Utils.isEmpty(passInfo.getTpurl())) {
+                        passInfo.setTpurl(Solon.cfg().get("solon.cloud.dhkafka.event.image.url.gateway") + v.get("imgUrl").getString());
+                    } else if (Utils.isEmpty(passInfo.getTpurl1())) {
+                        passInfo.setTpurl1(Solon.cfg().get("solon.cloud.dhkafka.event.image.url.gateway") + v.get("imgUrl").getString());
+                    } else if (Utils.isEmpty(passInfo.getTpurl2())) {
+                        passInfo.setTpurl2(Solon.cfg().get("solon.cloud.dhkafka.event.image.url.gateway") + v.get("imgUrl").getString());
+                    }
                 }
                 if ("2".equals(v.get("imgType").getString()) && v.get("imgIdx").getInt() == 1) {
                     passInfo.setHptzTpurl(Solon.cfg().get("solon.cloud.dhkafka.event.image.url.gateway") + v.get("imgUrl").getString());

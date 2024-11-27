@@ -2,6 +2,8 @@ package com.bcht.rminf.modules.terminal.model;
 
 import io.vertx.core.buffer.Buffer;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -36,7 +38,7 @@ public enum OperationObj {
     SERIAL_PORT_PARAMS(0x03, "串口参数", 7, new HashMap<>()),
     FILE_TRANSFER(0x04, "文件传输", 0, new HashMap<>()),
     DEVICE_TIME(0x05, "设备时间", 6, new HashMap<>()),
-    DEVICE_INFO(0x06, "设备信息", 32, new HashMap<OperationType, Consumer<Context>>() {{
+    DEVICE_INFO(0x06, "设备信息", 72, new HashMap<OperationType, Consumer<Context>>() {{
         put(OperationType.QUERY_REQUEST, context -> {
             Buffer response = Buffer.buffer(6);
             response.appendByte(OperationType.QUERY_REQUEST.getCode());
@@ -46,26 +48,33 @@ public enum OperationObj {
             context.getNetSocket().write(response);
         });
         put(OperationType.QUERY_RESPONSE, context -> {
+            // 0000000042434854030005005f41ba2b333e030002000f00e80707090000000000000000000000000000000038000000aa9b047d000000880480e26648d6b61050b75311048000000a14297e
             // 00000000(附加) 42434854(制造厂商) 0300(产品ID) 0500(型号ID) 5f41ba2b333e(出厂日期) 0300(批次编号) 02000f00e8070709(当前版本) 00000000 00000000
             Buffer packet = context.getBuffer();
             Device device = context.getDevice();
             device.setManufacturer(packet.getString(4, 8));
             device.setProductId(packet.getUnsignedShortLE(8));
             device.setProductModel(packet.getUnsignedShortLE(10));
-            int millisecond = Integer.parseInt(bytesToBinary(packet.getBytes(12, 14)).substring(0, 10), 2);
-            int second = Integer.parseInt(bytesToBinary(packet.getBytes(12, 14)).substring(10, 16), 2);
-            int minute = Integer.parseInt(bytesToBinary(packet.getBytes(14, 18)).substring(0, 6), 2);
-            int hour = Integer.parseInt(bytesToBinary(packet.getBytes(14, 18)).substring(6, 11), 2);
-            int week = Integer.parseInt(bytesToBinary(packet.getBytes(14, 18)).substring(11, 14), 2);
-            int day = Integer.parseInt(bytesToBinary(packet.getBytes(14, 18)).substring(14, 19), 2);
-            int month = Integer.parseInt(bytesToBinary(packet.getBytes(14, 18)).substring(19, 23), 2);
-            int year = Integer.parseInt(bytesToBinary(packet.getBytes(14, 18)).substring(23, 32), 2);
-
+            // 2024-07-12 14:58:16.351 出场时间
+            int millisecond = Integer.parseInt(String.format("%16s", Integer.toBinaryString(packet.getUnsignedShortLE(12))).replace(' ', '0').substring(6, 16), 2);
+            int second = Integer.parseInt(String.format("%16s", Integer.toBinaryString(packet.getUnsignedShortLE(12))).replace(' ', '0').substring(0, 6), 2);
+            int minute = Integer.parseInt(String.format("%32s", Long.toBinaryString(packet.getUnsignedIntLE(14))).replace(' ', '0').substring(26, 32), 2);
+            int hour = Integer.parseInt(String.format("%32s", Long.toBinaryString(packet.getUnsignedIntLE(14))).replace(' ', '0').substring(21, 26), 2);
+            // int week = Integer.parseInt(String.format("%32s", Long.toBinaryString(packet.getUnsignedIntLE(14))).replace(' ', '0').substring(18, 21), 2);
+            int day = Integer.parseInt(String.format("%32s", Long.toBinaryString(packet.getUnsignedIntLE(14))).replace(' ', '0').substring(13, 18), 2);
+            int month = Integer.parseInt(String.format("%32s", Long.toBinaryString(packet.getUnsignedIntLE(14))).replace(' ', '0').substring(9, 13), 2) + 1;
+            int year = Integer.parseInt(String.format("%32s", Long.toBinaryString(packet.getUnsignedIntLE(14))).replace(' ', '0').substring(0, 9), 2) + 1900; // 11111100100
+            device.setProductionDate(String.format("%d-%02d-%02d", year, month, day/*, hour, minute, second, millisecond*/));
             device.setBatchNumber(packet.getUnsignedShortLE(18));
-            // device.setSoftwareVersion();
+            // V2.0.15.20240709 版本
+            device.setSoftwareVersion(String.format("V%s.%s.%s.%s%02d%02d", packet.getUnsignedByte(20), packet.getUnsignedByte(21), packet.getUnsignedShortLE(22),
+                    packet.getUnsignedShortLE(24), packet.getUnsignedByte(26), packet.getUnsignedByte(27)));
+            // 5F41BA2B333E  唯一标识
+            device.setSerialNumber(bytesToHex(packet.getBytes(12, 18)) + bytesToHex(packet.getBytes(18, 20)));
             // 区域号（读写） 4个字节
             // 经度（读写） 4个字节
-
+            // packet.getFloat(32)
+            device.setDeviceName(new String(packet.getBytes(44, 76), StandardCharsets.UTF_8));
             // device.setProductionDate(packet.getString(12, 18));
             // System.out.println();
         });
@@ -152,7 +161,7 @@ public enum OperationObj {
             }
             hexString.append(hex);
         }
-        return hexString.toString();
+        return hexString.toString().toUpperCase();
     }
 
     public static String bytesToBinary(byte[] bytes) {
@@ -162,6 +171,30 @@ public enum OperationObj {
             binaryStringBuilder.append(String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0'));
         }
         return binaryStringBuilder.toString();
+    }
+
+    // 将十六进制字符串转换为字节数组的方法
+    public static byte[] hexStringToByteArray(String s) {
+        int len = s.length();
+        byte[] data = new byte[len / 2];
+        for (int i = 0; i < len; i += 2) {
+            data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4)
+                    + Character.digit(s.charAt(i + 1), 16));
+        }
+        return data;
+    }
+
+    public static void main(String[] args) throws UnsupportedEncodingException {
+        String hexStr = "38000000AA9B047D000000880480E26648D6B61050B75311048000000A14297E";
+
+        // 将十六进制字符串转换为字节数组
+        byte[] bytes = hexStringToByteArray(hexStr);
+
+        // 将字节数组转换为字符串，这里假设编码为GBK
+        String result = new String(bytes, "GBK");
+
+        // 打印结果
+        System.out.println(result);
     }
 
 }
