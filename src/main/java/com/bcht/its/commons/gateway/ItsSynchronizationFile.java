@@ -13,7 +13,7 @@ import java.util.Map;
  * 创建时间: 2017/5/26.
  */
 public class ItsSynchronizationFile implements Serializable {
-    /**过车数据json1*/
+    /**过车数据json*/
     private String passInfoJson;
     /**图片数据*/
     private Map<String,byte[]> imageData = new LinkedHashMap<String, byte[]>();

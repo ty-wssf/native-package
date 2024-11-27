@@ -140,7 +140,7 @@ public class DHkafkaLifecycleBean extends AbstractVerticle {
         // 确定需要存储的表 当数据为缓存数据时，只需插入到缓存表
         String tableName = (Utils.isNotEmpty(passInfo.getWfdm()) && (!"0".equals(passInfo.getWfdm()))) ? "ds_violation" : "ds_tfcpass";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        tableName += sdf.format(new Date());
+        tableName += sdf.format(new java.util.Date());
         log.info("写入表:{}", tableName);
         String sql = "INSERT INTO " + tableName + "(gcbh,sbxh,gcsj,hphm,hpzl,hpys,cwkc,clys,cllx,sd,cdbh,fx,wfdm,tpurl,tpurl1,tpurl2," +
                 "hptzTpurl,faceUrl,fjsFaceUrl)" +

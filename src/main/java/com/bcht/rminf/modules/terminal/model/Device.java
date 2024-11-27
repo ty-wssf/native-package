@@ -39,7 +39,7 @@ public class Device {
     @ApiModelProperty("经度")
     private String longitude;
     @ApiModelProperty("经度")
-    private String longitude;
+    private String longitude1;
 
     public Device(String ip) {
         this.ip = ip;
