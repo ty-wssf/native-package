@@ -17,7 +17,7 @@ on:
 jobs:
   build:
 
-    runs-on: windows-2022
+    runs-on: windows-latest
 
     steps:
 
@@ -33,7 +33,7 @@ jobs:
       - name: GitHub Action for GraalVM JDK 21
         uses: graalvm/setup-graalvm@v1
         with:
-          java-version: '21.0.1' # for a specific JDK 21;
+          java-version: '21' # for a specific JDK 21;
           distribution: 'graalvm' # New 'distribution' option
           cache: maven
 
