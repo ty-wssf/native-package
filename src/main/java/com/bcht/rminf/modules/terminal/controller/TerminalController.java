@@ -50,6 +50,7 @@ public class TerminalController {
         // 等待异步操作完成
         CompletableFuture<Message<String>> completableFuture = messageFuture.toCompletionStage().toCompletableFuture();
         Device device = ONode.deserialize(completableFuture.get().body(), Device.class);
+        device.setDeviceStateList(device.getDeviceStateMap().values());
         log.info("device：{}", device);
         return Result.data(device);
     }

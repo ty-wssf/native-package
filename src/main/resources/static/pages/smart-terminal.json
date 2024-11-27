@@ -1,180 +1,190 @@
 {
-  "type": "page",
-  "title": "智能终端",
-  "subTitle": "百诚智能终端",
-  "body": [
-    {
-      "type": "form",
-      "title": "配置表单",
-      "api": "sys/config?category=smart_terminal",
-      "initApi": "sys/config/category/smart_terminal",
-      "columnCount": 6,
-      "body": [
+    "type":"page",
+    "title":"智能终端",
+    "subTitle":"百诚智能终端",
+    "body":[
         {
-          "name": "smart_terminal_enabled",
-          "type": "radios",
-          "label": "是否启用",
-          "value": false,
-          "options": [
-            {
-              "label": "启用",
-              "value": true
-            },
-            {
-              "label": "禁用",
-              "value": false
-            }
-          ]
+            "type":"form",
+            "title":"配置表单",
+            "api":"sys/config?category=smart_terminal",
+            "initApi":"sys/config/category/smart_terminal",
+            "columnCount":6,
+            "body":[
+                {
+                    "name":"smart_terminal_enabled",
+                    "type":"radios",
+                    "label":"是否启用",
+                    "value":false,
+                    "options":[
+                        {
+                            "label":"启用",
+                            "value":true
+                        },
+                        {
+                            "label":"禁用",
+                            "value":false
+                        }
+                    ]
+                },
+                {
+                    "name":"smart_terminal_server_port",
+                    "type":"input-number",
+                    "precision":0,
+                    "min":"81",
+                    "label":"服务端口",
+                    "value":1234
+                }
+            ]
         },
         {
-          "name": "smart_terminal_server_port",
-          "type": "input-number",
-          "precision": 0,
-          "min": "81",
-          "label": "服务端口",
-          "value": 1234
-        }
-      ]
-    },
-    {
-      "type": "service",
-      "api": "/terminal",
-      "interval": 5000,
-      "silentPolling": true,
-      "body": [
-        {
-          "type": "table2",
-          "title": "智能终端设备列表",
-          "source": "$rows",
-          "columns": [
-            {
-              "name": "ip",
-              "label": "设备ip"
-            },
-            {
-              "title": "操作",
-              "type": "button",
-              "label": "详情",
-              "size": "sm",
-              "actionType": "dialog",
-              "dialog": {
-                "title": "终端详情",
-                "size": "lg",
-                "body": [
-                  {
-                    "type": "service",
-                    "api": "/terminal/deviceinfo/${ip}",
-                    "body": [
-                      {
-                        "type": "property",
-                        "title": "基础信息",
-                        "items": [
-                          {
-                            "label": "产品类型",
-                            "content": "${productIdName}"
-                          },
-                          {
-                            "label": "产品型号",
-                            "content": "${productModelName}"
-                          },
-                          {
-                            "label": "设备IP",
-                            "content": "${ip}"
-                          },
-                          {
-                            "label": "设备状态",
-                            "content": {
-                                "type": "tag",
-                                "label": "${statusName}",
-                                "color": "${status == '1' ? 'success' : 'inactive'}"
+            "type":"service",
+            "api":"/terminal",
+            "interval":5000,
+            "silentPolling":true,
+            "body":[
+                {
+                    "type":"table2",
+                    "title":"智能终端设备列表",
+                    "source":"$rows",
+                    "columns":[
+                        {
+                            "name":"ip",
+                            "label":"设备ip"
+                        },
+                        {
+                            "title":"操作",
+                            "type":"button",
+                            "label":"详情",
+                            "size":"sm",
+                            "actionType":"dialog",
+                            "dialog":{
+                                "title":"终端详情",
+                                "size":"lg",
+                                "body":[
+                                    {
+                                        "type":"service",
+                                        "api":"/terminal/deviceinfo/${ip}",
+                                        "body":[
+                                            {
+                                                "type":"property",
+                                                "title":"基础信息",
+                                                "items":[
+                                                    {
+                                                        "label":"产品类型",
+                                                        "content":"${productIdName}"
+                                                    },
+                                                    {
+                                                        "label":"产品型号",
+                                                        "content":"${productModelName}"
+                                                    },
+                                                    {
+                                                        "label":"设备IP",
+                                                        "content":"${ip}"
+                                                    },
+                                                    {
+                                                        "label":"设备状态",
+                                                        "content":{
+                                                            "type":"tag",
+                                                            "label":"${statusName}",
+                                                            "color":"${status == '1' ? 'success' : 'inactive'}"
+                                                        }
+                                                    },
+                                                    {
+                                                        "label":"出场日期",
+                                                        "content":"${productionDate}"
+                                                    },
+                                                    {
+                                                        "label":"软件版本",
+                                                        "content":"${softwareVersion}"
+                                                    },
+                                                    {
+                                                        "label":"序列号",
+                                                        "content":"${serialNumber}"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type":"each",
+                                                "name":"deviceStateList",
+                                                "items":{
+                                                    "type":"property",
+                                                    "title":"网口${id}上报状态",
+                                                    "items":[
+                                                        {
+                                                            "label":"电压",
+                                                            "content":"${voltage}"
+                                                        },
+                                                        {
+                                                            "label":"电流",
+                                                            "content":"${electricCurrent}"
+                                                        },
+                                                        {
+                                                            "label":"功率",
+                                                            "content":"${power}"
+                                                        },
+                                                        {
+                                                            "label":"功耗",
+                                                            "content":"${powerConsumption}"
+                                                        },
+                                                        {
+                                                            "label":"俯仰角度",
+                                                            "content":"${pitch}"
+                                                        },
+                                                        {
+                                                            "label":"横滚角度",
+                                                            "content":"${rollAngle}"
+                                                        },
+                                                        {
+                                                            "label":"方位角度",
+                                                            "content":"${azimuthAngle}"
+                                                        },
+                                                        {
+                                                            "label":"温度",
+                                                            "content":"${temperature}"
+                                                        },
+                                                        {
+                                                            "label":"湿度",
+                                                            "content":"${humidity}"
+                                                        },
+                                                        {
+                                                            "label":"风速",
+                                                            "content":"${windSpeed}"
+                                                        },
+                                                        {
+                                                            "label":"PM2.5",
+                                                            "content":"${PM2_5}"
+                                                        },
+                                                        {
+                                                            "label":"PM10",
+                                                            "content":"${PM10}"
+                                                        },
+                                                        {
+                                                            "label":"门磁",
+                                                            "content":"${doorContact}"
+                                                        },
+                                                        {
+                                                            "label":"振动",
+                                                            "content":"${vibrate}"
+                                                        },
+                                                        {
+                                                            "label":"烟雾",
+                                                            "content":"${smoke}"
+                                                        },
+                                                        {
+                                                            "label":"水浸",
+                                                            "content":"${waterImmersion}"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
                             }
-                          },
-                          {
-                            "label": "出场日期",
-                            "content": "${productionDate}"
-                          },
-                          {
-                            "label": "软件版本",
-                            "content": "${softwareVersion}"
-                          },
-                          {
-                            "label": "序列号",
-                            "content": "${serialNumber}"
-                          }
-                        ]
-                      },
-                      {
-                        "type": "property",
-                        "title": "机器配置1",
-                        "items": [
-                          {
-                            "label": "cpu",
-                            "content": "1 core"
-                          },
-                          {
-                            "label": "memory",
-                            "content": "4G"
-                          },
-                          {
-                            "label": "disk",
-                            "content": "80G"
-                          },
-                          {
-                            "label": "network",
-                            "content": "4M",
-                            "span": 2
-                          },
-                          {
-                            "label": "IDC",
-                            "content": "beijing"
-                          },
-                          {
-                            "label": "Note",
-                            "content": "其它说明",
-                            "span": 3
-                          }
-                        ]
-                      },
-                      {
-                        "type": "property",
-                        "title": "机器配置2",
-                        "items": [
-                          {
-                            "label": "cpu",
-                            "content": "1 core"
-                          },
-                          {
-                            "label": "memory",
-                            "content": "4G"
-                          },
-                          {
-                            "label": "disk",
-                            "content": "80G"
-                          },
-                          {
-                            "label": "network",
-                            "content": "4M",
-                            "span": 2
-                          },
-                          {
-                            "label": "IDC",
-                            "content": "beijing"
-                          },
-                          {
-                            "label": "Note",
-                            "content": "其它说明",
-                            "span": 3
-                          }
-                        ]
-                      }
+                        }
                     ]
-                  }
-                ]
-              }
-            }
-          ]
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }

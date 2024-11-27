@@ -1,13 +1,14 @@
 package com.bcht.rminf.modules.terminal.model;
 
 import io.vertx.core.buffer.Buffer;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
+@Slf4j
 public enum OperationObj {
 
     /**
@@ -74,7 +75,11 @@ public enum OperationObj {
             // 区域号（读写） 4个字节
             // 经度（读写） 4个字节
             // packet.getFloat(32)
-            device.setDeviceName(new String(packet.getBytes(44, 76), StandardCharsets.UTF_8));
+            try {
+                device.setDeviceName(new String(packet.getBytes(40, 72), "GBK").trim());
+            } catch (UnsupportedEncodingException e) {
+                // throw new RuntimeException(e);
+            }
             // device.setProductionDate(packet.getString(12, 18));
             // System.out.println();
         });
@@ -95,9 +100,167 @@ public enum OperationObj {
     /**
      * 智能终端部分协议
      */
-    INTERFACE_ALARM(0x10, "接口与报警", 10, new HashMap<>()),
+    INTERFACE_ALARM(0x10, "接口与报警", 10, new HashMap<OperationType, Consumer<Context>>() {{
+        put(OperationType.INITIATIVE_REPORT, (context) -> {
+        });
+    }}),
     INTERFACE_STATUS(0x11, "接口状态", 5, new HashMap<OperationType, Consumer<Context>>() {{
         put(OperationType.INITIATIVE_REPORT, (context) -> {
+            Buffer packet = context.getBuffer();
+            // 根据附加字段第一个字节的数据，判断上报的是什么消息
+            short firstByte = packet.getUnsignedByte(0);
+            Device device = context.getDevice();
+            // AC型
+            if (firstByte == 0x01) {
+                // 0：无效 1：电压 2：电流 3：功率 4：功耗
+                short secondByte = packet.getUnsignedByte(1);
+                if (secondByte == 0x01) {// 8211 01 01 01 80 bd08000000
+                    log.info("端口ID：{}，电压：{}V", packet.getUnsignedByte(2), (float) packet.getUnsignedIntLE(4) / 10);
+                    device.getDeviceStateMap().computeIfAbsent(String.valueOf(packet.getUnsignedByte(2)), key -> {
+                        DeviceState deviceState = new DeviceState();
+                        deviceState.setId(key);
+                        deviceState.setVoltage((float) packet.getUnsignedIntLE(4) / 10);
+                        return deviceState;
+                    }).setVoltage((float) packet.getUnsignedIntLE(4) / 10);
+                } else if (secondByte == 0x02) {
+                    log.info("端口ID：{}，电流：{}mA", packet.getUnsignedByte(2), (float) packet.getUnsignedIntLE(4) / 10);
+                    device.getDeviceStateMap().computeIfAbsent(String.valueOf(packet.getUnsignedByte(2)), key -> {
+                        DeviceState deviceState = new DeviceState();
+                        deviceState.setId(key);
+                        deviceState.setElectricCurrent((float) packet.getUnsignedIntLE(4) / 10);
+                        return deviceState;
+                    }).setElectricCurrent((float) packet.getUnsignedIntLE(4) / 10);
+                } else if (secondByte == 0x03) {
+                    log.info("端口ID：{}，功率：{}w", packet.getUnsignedByte(2), (float) packet.getUnsignedIntLE(4) / 1000);
+                    device.getDeviceStateMap().computeIfAbsent(String.valueOf(packet.getUnsignedByte(2)), key -> {
+                        DeviceState deviceState = new DeviceState();
+                        deviceState.setId(key);
+                        deviceState.setPower((float) packet.getUnsignedIntLE(4) / 1000);
+                        return deviceState;
+                    }).setPower((float) packet.getUnsignedIntLE(4) / 10);
+                } else if (secondByte == 0x04) {// 8211 0104 0180 2900000000
+                    log.info("端口ID：{}，功耗：{}kw.h", packet.getUnsignedByte(2), (float) packet.getUnsignedIntLE(4) / 1000);
+                    device.getDeviceStateMap().computeIfAbsent(String.valueOf(packet.getUnsignedByte(2)), key -> {
+                        DeviceState deviceState = new DeviceState();
+                        deviceState.setId(key);
+                        deviceState.setPowerConsumption((float) packet.getUnsignedIntLE(4) / 1000);
+                        return deviceState;
+                    }).setPowerConsumption((float) packet.getUnsignedIntLE(4) / 10);
+                }
+            } else if (firstByte == 0x02) { // 串口型232
+                // 0：无效 1：俯仰角度 2：横滚角度 3：方位角度
+                short secondByte = packet.getUnsignedByte(1);
+                if (secondByte == 0x01) {// 8211 01 01 01 80 bd08000000
+                    log.info("端口ID：{}，俯仰角度：{}", packet.getUnsignedByte(2), (float) packet.getUnsignedIntLE(4) / 100);
+                    device.getDeviceStateMap().computeIfAbsent(String.valueOf(packet.getUnsignedByte(2)), key -> {
+                        DeviceState deviceState = new DeviceState();
+                        deviceState.setId(key);
+                        deviceState.setPitch((float) packet.getUnsignedIntLE(4) / 100);
+                        return deviceState;
+                    }).setPitch((float) packet.getUnsignedIntLE(4) / 100);
+                } else if (secondByte == 0x02) {
+                    log.info("端口ID：{}，横滚角度：{}", packet.getUnsignedByte(2), (float) packet.getUnsignedIntLE(4) / 100);
+                    device.getDeviceStateMap().computeIfAbsent(String.valueOf(packet.getUnsignedByte(2)), key -> {
+                        DeviceState deviceState = new DeviceState();
+                        deviceState.setId(key);
+                        deviceState.setRollAngle((float) packet.getUnsignedIntLE(4) / 100);
+                        return deviceState;
+                    }).setRollAngle((float) packet.getUnsignedIntLE(4) / 100);
+                } else if (secondByte == 0x03) {
+                    log.info("端口ID：{}，方位角度：{}", packet.getUnsignedByte(2), (float) packet.getUnsignedIntLE(4) / 100);
+                    device.getDeviceStateMap().computeIfAbsent(String.valueOf(packet.getUnsignedByte(2)), key -> {
+                        DeviceState deviceState = new DeviceState();
+                        deviceState.setId(key);
+                        deviceState.setAzimuthAngle((float) packet.getUnsignedIntLE(4) / 100);
+                        return deviceState;
+                    }).setAzimuthAngle((float) packet.getUnsignedIntLE(4) / 100);
+                }
+            } else if (firstByte == 0x03) { // 串口型485
+                // 0：无效 1：温度（单位：℃） 2：湿度（单位：%）
+                short secondByte = packet.getUnsignedByte(1);
+                if (secondByte == 0x01) {// 8211 01 01 01 80 bd08000000
+                    log.info("端口ID：{}，温度：{}℃", packet.getUnsignedByte(2), (float) packet.getUnsignedIntLE(4) / 10);
+                    device.getDeviceStateMap().computeIfAbsent(String.valueOf(packet.getUnsignedByte(2)), key -> {
+                        DeviceState deviceState = new DeviceState();
+                        deviceState.setId(key);
+                        deviceState.setTemperature((float) packet.getUnsignedIntLE(4) / 10);
+                        return deviceState;
+                    }).setTemperature((float) packet.getUnsignedIntLE(4) / 10);
+                } else if (secondByte == 0x02) {
+                    log.info("端口ID：{}，湿度：{}%", packet.getUnsignedByte(2), (float) packet.getUnsignedIntLE(4) / 10);
+                    device.getDeviceStateMap().computeIfAbsent(String.valueOf(packet.getUnsignedByte(2)), key -> {
+                        DeviceState deviceState = new DeviceState();
+                        deviceState.setId(key);
+                        deviceState.setHumidity((float) packet.getUnsignedIntLE(4) / 10);
+                        return deviceState;
+                    }).setHumidity((float) packet.getUnsignedIntLE(4) / 10);
+                }
+            } else if (firstByte == 0x04) { // 模拟量型
+                // 0：无效 1：风速（单位：m/s） 2：PM2.5（单位：ug/m³） 3：PM10（单位：ug/m³）
+                short secondByte = packet.getUnsignedByte(1);
+                if (secondByte == 0x01) {// 8211 01 01 01 80 bd08000000
+                    log.info("端口ID：{}，风速：{}m/s", packet.getUnsignedByte(2), (float) packet.getUnsignedIntLE(4));
+                    device.getDeviceStateMap().computeIfAbsent(String.valueOf(packet.getUnsignedByte(2)), key -> {
+                        DeviceState deviceState = new DeviceState();
+                        deviceState.setId(key);
+                        deviceState.setWindSpeed((float) packet.getUnsignedIntLE(4));
+                        return deviceState;
+                    }).setWindSpeed((float) packet.getUnsignedIntLE(4));
+                } else if (secondByte == 0x02) {
+                    log.info("端口ID：{}，PM2.5：{}ug/m³", packet.getUnsignedByte(2), (float) packet.getUnsignedIntLE(4));
+                    device.getDeviceStateMap().computeIfAbsent(String.valueOf(packet.getUnsignedByte(2)), key -> {
+                        DeviceState deviceState = new DeviceState();
+                        deviceState.setId(key);
+                        deviceState.setPM2_5((float) packet.getUnsignedIntLE(4));
+                        return deviceState;
+                    }).setPM2_5((float) packet.getUnsignedIntLE(4));
+                } else if (secondByte == 0x03) {
+                    log.info("端口ID：{}，PM10：{}ug/m³", packet.getUnsignedByte(2), (float) packet.getUnsignedIntLE(4));
+                    device.getDeviceStateMap().computeIfAbsent(String.valueOf(packet.getUnsignedByte(2)), key -> {
+                        DeviceState deviceState = new DeviceState();
+                        deviceState.setId(key);
+                        deviceState.setPM10((float) packet.getUnsignedIntLE(4));
+                        return deviceState;
+                    }).setPM10((float) packet.getUnsignedIntLE(4));
+                }
+            } else if (firstByte == 0x05) { // IO触发型
+                // 0：无效 1：门磁（单位：0常开、1常闭） 2：振动（单位：0常开、1常闭） 3：烟雾（单位：0常开、1常闭） 4：水浸（单位：0常开、1常闭）
+                short secondByte = packet.getUnsignedByte(1);
+                if (secondByte == 0x01) {// 8211 01 01 01 80 bd08000000
+                    log.info("端口ID：{}，门磁：{}", packet.getUnsignedByte(2), (float) packet.getUnsignedIntLE(4));
+                    device.getDeviceStateMap().computeIfAbsent(String.valueOf(packet.getUnsignedByte(2)), key -> {
+                        DeviceState deviceState = new DeviceState();
+                        deviceState.setId(key);
+                        deviceState.setDoorContact((float) packet.getUnsignedIntLE(4));
+                        return deviceState;
+                    }).setDoorContact((float) packet.getUnsignedIntLE(4));
+                } else if (secondByte == 0x02) {
+                    log.info("端口ID：{}，振动：{}", packet.getUnsignedByte(2), (float) packet.getUnsignedIntLE(4));
+                    device.getDeviceStateMap().computeIfAbsent(String.valueOf(packet.getUnsignedByte(2)), key -> {
+                        DeviceState deviceState = new DeviceState();
+                        deviceState.setId(key);
+                        deviceState.setVibrate((float) packet.getUnsignedIntLE(4));
+                        return deviceState;
+                    }).setVibrate((float) packet.getUnsignedIntLE(4));
+                } else if (secondByte == 0x03) {
+                    log.info("端口ID：{}，烟雾：{}", packet.getUnsignedByte(2), (float) packet.getUnsignedIntLE(4));
+                    device.getDeviceStateMap().computeIfAbsent(String.valueOf(packet.getUnsignedByte(2)), key -> {
+                        DeviceState deviceState = new DeviceState();
+                        deviceState.setId(key);
+                        deviceState.setSmoke((float) packet.getUnsignedIntLE(4));
+                        return deviceState;
+                    }).setSmoke((float) packet.getUnsignedIntLE(4));
+                } else if (secondByte == 0x04) {
+                    log.info("端口ID：{}，水浸：{}", packet.getUnsignedByte(2), (float) packet.getUnsignedIntLE(4));
+                    device.getDeviceStateMap().computeIfAbsent(String.valueOf(packet.getUnsignedByte(2)), key -> {
+                        DeviceState deviceState = new DeviceState();
+                        deviceState.setId(key);
+                        deviceState.setWaterImmersion((float) packet.getUnsignedIntLE(4));
+                        return deviceState;
+                    }).setWaterImmersion((float) packet.getUnsignedIntLE(4));
+                }
+            }
+
         });
     }}),
     TIMER_POWER_SUPPLY(0x12, "定时供电", 4, new HashMap<>()),
@@ -185,13 +348,13 @@ public enum OperationObj {
     }
 
     public static void main(String[] args) throws UnsupportedEncodingException {
-        String hexStr = "38000000AA9B047D000000880480E26648D6B61050B75311048000000A14297E";
+        String hexStr = "42 43 48 54 03 00 04 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 BF B4 BE CD BF B4 BC B8 BD DA BF CE BF B4 BF B4 BF B4 00 00 6E 00 00 00 B0 6B 9C 5F";
 
         // 将十六进制字符串转换为字节数组
-        byte[] bytes = hexStringToByteArray(hexStr);
+        byte[] bytes = hexStringToByteArray(hexStr.replace(" ", ""));
 
         // 将字节数组转换为字符串，这里假设编码为GBK
-        String result = new String(bytes, "GBK");
+        String result = new String(bytes, "GB2312");
 
         // 打印结果
         System.out.println(result);

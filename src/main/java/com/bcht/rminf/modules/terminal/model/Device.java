@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.*;
+
 @Data
 @ApiModel
 public class Device {
@@ -36,10 +38,8 @@ public class Device {
     private String serialNumber;
     @ApiModelProperty("设备名称")
     private String deviceName;
-    @ApiModelProperty("经度")
-    private String longitude;
-    @ApiModelProperty("经度")
-    private String longitude1;
+    private Map<String, DeviceState> deviceStateMap = new HashMap<>();
+    private Collection<DeviceState> deviceStateList;
 
     public Device(String ip) {
         this.ip = ip;
