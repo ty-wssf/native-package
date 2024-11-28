@@ -64,6 +64,11 @@
             <artifactId>jimmer-sql</artifactId>
             <version>${jimmer.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-web</artifactId>
+            <version>4.5.4</version>
+        </dependency>
     </dependencies>
 
     <build>
