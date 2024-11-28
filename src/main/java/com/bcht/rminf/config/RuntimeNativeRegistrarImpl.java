@@ -27,7 +27,7 @@ public class RuntimeNativeRegistrarImpl implements RuntimeNativeRegistrar {
 
         // 注册静态资源
         metadata.registerResourceInclude("h2-database.sql");
-        metadata.registerResourceInclude("app.yml");
+        // metadata.registerResourceInclude("app.yml");
        //  metadata.registerResourceInclude("static/index.html");
 
         metadata.registerArg("-J--add-opens=java.base/java.lang.invoke=ALL-UNNAMED");

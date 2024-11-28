@@ -59,6 +59,11 @@
             <artifactId>HikariCP</artifactId>
             <!--<version>5.0.1</version>--> <!-- 使用最新的版本 -->
         </dependency>
+        <dependency>
+            <groupId>org.babyfish.jimmer</groupId>
+            <artifactId>jimmer-sql</artifactId>
+            <version>${jimmer.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

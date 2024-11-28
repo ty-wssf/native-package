@@ -1,5 +1,8 @@
 server.port: 5999
 
+# 调试模式
+solon.debug: 1
+
 solon.app:
   name: 'hj-rminf'
   group: 'hj'
