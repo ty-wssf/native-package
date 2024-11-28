@@ -19,7 +19,7 @@ public class App {
         Solon.start(App.class, args, app -> {
             // 重定向首页
             app.get("/", ctx -> ctx.redirect("index.html"));
-            StaticMappings.add("/", new ClassPathStaticRepository("static/")); // 原生编译环境下会丢失 @todo
+            // StaticMappings.add("/", new ClassPathStaticRepository("static/")); // 原生编译环境下会丢失 @todo
             app.onEvent(AppInitEndEvent.class, e -> {
                 Solon.context().subBeansOfType(JSqlClient.class, jSqlClient -> {
                     try {
