@@ -1,8 +1,5 @@
 package com.bcht.rminf.config;
 
-import com.bcht.rminf.modules.demo.model.common.BaseEntity;
-import com.github.xiaoymin.knife4j.solon.settings.OpenApiExtendSetting;
-import com.github.xiaoymin.knife4j.solon.settings.OpenApiSetting;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.aot.RuntimeNativeMetadata;
 import org.noear.solon.aot.RuntimeNativeRegistrar;
@@ -16,9 +13,9 @@ public class RuntimeNativeRegistrarImpl implements RuntimeNativeRegistrar {
 
     @Override
     public void register(AppContext context, RuntimeNativeMetadata metadata) {
-        metadata.registerReflection(OpenApiSetting.class, MemberCategory.values());
-        metadata.registerReflection(OpenApiExtendSetting.class, MemberCategory.values());
-        metadata.registerReflection(BaseEntity.class, MemberCategory.values());
+        /*metadata.registerReflection(OpenApiSetting.class, MemberCategory.values());
+        metadata.registerReflection(OpenApiExtendSetting.class, MemberCategory.values());*/
+        // metadata.registerReflection(BaseEntity.class, MemberCategory.values());
         //扫描类文件并处理（采用两段式加载，可以部分bean先处理；剩下的为第二段处理）
         ScanUtil.scan(context.getClassLoader(), "com/bcht", n -> n.endsWith(".class"))
                 .forEach(name -> {
@@ -31,7 +28,7 @@ public class RuntimeNativeRegistrarImpl implements RuntimeNativeRegistrar {
         // 注册静态资源
         metadata.registerResourceInclude("h2-database.sql");
         metadata.registerResourceInclude("app.yml");
-        metadata.registerResourceInclude("static/index.html");
+       //  metadata.registerResourceInclude("static/index.html");
 
         metadata.registerArg("-J--add-opens=java.base/java.lang.invoke=ALL-UNNAMED");
         metadata.registerArg("-J--add-opens=java.base/java.nio=ALL-UNNAMED");
