@@ -45,7 +45,7 @@ public class TerminalProtocolServer extends AbstractVerticle {
         subscribeConfigChange();
         // 订阅总线请求
         // 设备列表
-        vertx.eventBus().consumer("terminal.deviceList").handler(msg -> {
+        /*vertx.eventBus().consumer("terminal.deviceList").handler(msg -> {
             msg.reply(ONode.serialize(deviceRepo.values())); // 发送响应
         });
         vertx.eventBus().consumer("terminal.deviceinfo").handler(msg -> {
@@ -62,7 +62,7 @@ public class TerminalProtocolServer extends AbstractVerticle {
                 msg.reply(ONode.serialize(deviceRepo.get(ip))); // 发送响应
             });
 
-        });
+        });*/
     }
 
     private void start0() throws Exception {
