@@ -33,7 +33,7 @@ jobs:
       - name: GitHub Action for GraalVM JDK 21
         uses: graalvm/setup-graalvm@v1
         with:
-          java-version: '23' # for a specific JDK 21;
+          java-version: '17' # for a specific JDK 21;
           distribution: 'graalvm' # New 'distribution' option
           cache: maven
 
